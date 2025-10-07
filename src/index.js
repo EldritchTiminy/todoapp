@@ -1,6 +1,6 @@
 import "./style.css";
 //import homePage from "./homepg";
-import taskLib from "./tasks";
+import "./tasks";
 
 // grab html elements
 let subBtn = document.getElementById("addBtn");
@@ -9,8 +9,8 @@ let subBtn = document.getElementById("addBtn");
 subBtn.addEventListener("click", () => {
   let newTask = createTask(getTitle(), getOrderNum());
   pushToLib(newTask);
-  console.log(taskLib);
-  renderList(taskLib);
+  console.log(window.GLOBALS.taskLib);
+  renderList(window.GLOBALS.taskLib);
 });
 
 // app functions
@@ -31,12 +31,12 @@ function clearTitle () {
 };
 
 function getOrderNum () {
-  return (taskLib.length + 1);
+  return (window.GLOBALS.taskLib.length + 1);
 };
 
 function pushToLib (taskObject) {
-  taskLib.push(taskObject);
-  console.log(taskLib);
+  window.GLOBALS.taskLib.push(taskObject);
+  console.log(window.GLOBALS.taskLib);
 };
 
 function renderTask (taskObject) {
@@ -52,11 +52,13 @@ function renderTask (taskObject) {
   taskDiv.appendChild(taskListOrder);
 
   let upBtn = document.createElement("button");
+  upBtn.type = "button";
   upBtn.textContent = "Move Up";
   upBtn.addEventListener("click", taskUp);
   taskDiv.appendChild(upBtn);
 
   let dnBtn = document.createElement("button");
+  dnBtn.type = "button";
   dnBtn.textContent = "Move Down";
   dnBtn.addEventListener("click", taskDn);
   taskDiv.appendChild(dnBtn);
@@ -88,30 +90,31 @@ function renderList (lib) {
 };
 
 function taskUp (event) {
-  let currentIndex = event.target.parentElement.dataset.indexNumber;
+  let currentIndex = Number(event.target.parentElement.dataset.indexNumber);
   if (currentIndex > 0) {
-    let upperTask = taskLib[currentIndex - 1];
-    let currentTask = taskLib[currentIndex];
-    upperTask.order += 1;
-    currentTask.order -= 1;
-    taskLib[currentIndex - 1] = taskLib[currentIndex];
-    taskLib[currentIndex] = upperTask;
-    renderList(taskLib);
+    let priorTask = window.GLOBALS.taskLib[currentIndex - 1];
+    let currentTask = window.GLOBALS.taskLib[currentIndex];
+    priorTask.order++;
+    currentTask.order--;
+    window.GLOBALS.taskLib[currentIndex - 1] = currentTask;
+    window.GLOBALS.taskLib[currentIndex] = priorTask;
+    renderList(window.GLOBALS.taskLib);
   };
 };
 
 function taskDn (event) {
-  let currentIndex = event.target.parentElement.dataset.indexNumber;
-  if (currentIndex < (taskLib.length - 1)) {
-    let nextIndex = currentIndex + 1;
-    let nextTask = taskLib[nextIndex];
-    let currentTask = taskLib[currentIndex];
-    console.log(nextTask);
-    nextTask.order -= 1;
-    currentTask.order += 1;
-    taskLib[currentIndex + 1] = currentTask;
-    taskLib[currentIndex] = nextTask;
-    renderList(taskLib);
+  let currentIndex = Number(event.target.parentElement.dataset.indexNumber);
+  let nextIndex = currentIndex + 1;
+  let libLen = window.GLOBALS.taskLib.length - 1;
+  console.log(libLen);
+  if (currentIndex < libLen) {
+    let nextTask = window.GLOBALS.taskLib[nextIndex];
+    let currentTask = window.GLOBALS.taskLib[currentIndex];
+    nextTask.order--;
+    currentTask.order++;
+    window.GLOBALS.taskLib[currentIndex + 1] = currentTask;
+    window.GLOBALS.taskLib[currentIndex] = nextTask;
+    renderList(window.GLOBALS.taskLib);
   };
 };
 
@@ -122,7 +125,7 @@ function testTasks () {
   pushToLib(task2);
   let task3 = createTask("Task #3", getOrderNum());
   pushToLib(task3);
-  renderList(taskLib);
+  renderList(window.GLOBALS.taskLib);
 };
 testTasks();
 

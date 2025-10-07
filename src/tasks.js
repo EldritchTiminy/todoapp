@@ -2,4 +2,4 @@ window.GLOBALS = {
   taskLib: []
 };
 
-export default taskLib;
+export default window;

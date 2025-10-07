@@ -1,5 +1,5 @@
 {
-  "name": "odin-restaurant",
+  "name": "todoapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EldritchTiminy/odin-restaurant.git"
+    "url": "git+https://github.com/EldritchTiminy/todoapp.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EldritchTiminy/odin-restaurant/issues"
+    "url": "https://github.com/EldritchTiminy/todoapp/issues"
   },
-  "homepage": "https://github.com/EldritchTiminy/odin-restaurant#readme",
+  "homepage": "https://github.com/EldritchTiminy/todoapp#readme",
   "devDependencies": {
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.4",
