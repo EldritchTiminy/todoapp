@@ -1,6 +1,6 @@
 import "./style.css";
-//import homePage from "./homepg";
-import "./tasks";
+import homePage from "./homepg";
+import window from "./tasks";
 
 // grab html elements
 let subBtn = document.getElementById("addBtn");
