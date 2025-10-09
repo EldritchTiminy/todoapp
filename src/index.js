@@ -9,6 +9,7 @@ let subBtn = document.getElementById("addBtn");
 subBtn.addEventListener("click", () => {
   let newTask = createTask(getTitle(), getOrderNum());
   pushToLib(newTask);
+  saveList();
   console.log(window.GLOBALS.taskLib);
   renderList(window.GLOBALS.taskLib);
 });
@@ -119,15 +120,15 @@ function taskDn (event) {
 };
 
 function testTasks () {
-  let task1 = createTask("Task #1", getOrderNum());
+  let task1 = createTask("Wash the dishes", getOrderNum());
   pushToLib(task1);
-  let task2 = createTask("Task #2", getOrderNum());
+  let task2 = createTask("Vacuum the livingroom", getOrderNum());
   pushToLib(task2);
-  let task3 = createTask("Task #3", getOrderNum());
+  let task3 = createTask("Check the mail", getOrderNum());
   pushToLib(task3);
   renderList(window.GLOBALS.taskLib);
 };
-testTasks();
+// testTasks();
 
 // object constructors
 function createTask (title, orderNum) {
@@ -137,6 +138,31 @@ function createTask (title, orderNum) {
   };
 };
 
-// initialize
-console.log("Index script running...");
-//homePage();
+// data storage functions
+function saveList () {
+  // temp storage value
+  const currentList = window.GLOBALS.taskLib;
+  // stringify list
+  const stringified = JSON.stringify(currentList);
+  // save to local storage
+  localStorage.setItem("taskList", stringified);
+};
+
+function loadList () {
+  // load from local storage
+  const savedList = localStorage.getItem("taskList");
+  // parse saved list
+  const parsedList = JSON.parse(savedList);
+  // overwrite current list
+  window.GLOBALS.taskLib = parsedList;
+};
+
+function updateList () {};
+
+// autoload storage
+if (!localStorage.getItem("taskList")) {
+  testTasks();
+} else {
+  loadList();
+  renderList(window.GLOBALS.taskLib);
+};
