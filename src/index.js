@@ -78,14 +78,25 @@ function renderTask (taskObject) {
 
   let tTitle = document.createElement("p");
   tTitle.textContent = taskObject.title;
+  tTitle.classList.add("primaryTask");
   taskDiv.appendChild(tTitle);
 
   let subTaskList = document.createElement("ul");
   subTaskList.classList.add("subTaskList");
   taskDiv.appendChild(subTaskList);
 
+  if (taskObject.subTasks) {
+    for (let task of taskObject.subTasks) {
+      let currentSub = document.createElement("li");
+      currentSub.classList.add("subTask");
+      currentSub.textContent = task;
+      subTaskList.appendChild(currentSub);
+    };
+  };
+
   let subTaskBtn = document.createElement("button");
   subTaskBtn.textContent = "Add Sub-task";
+  subTaskBtn.addEventListener("click", subTaskForm);
   taskDiv.appendChild(subTaskBtn);
 
   let delBtn = document.createElement("button");
@@ -140,6 +151,44 @@ function removeTask (event) {
   renderList(window.GLOBALS.taskLib);
 };
 
+function subTaskForm (event) {
+  let taskForm = document.createElement("form");
+  let textInput = document.createElement("input");
+  textInput.type = "text";
+  textInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      e.target.parentElement.querySelector(".submitBtn").click();
+    };
+  });
+  let submitBtn = document.createElement("button");
+  submitBtn.type = "button";
+  submitBtn.textContent = "Add Sub-Task";
+  submitBtn.classList.add("submitBtn");
+  submitBtn.addEventListener("click", renderSubTask);
+  taskForm.appendChild(textInput);
+  taskForm.appendChild(submitBtn);
+  event.target.parentElement.appendChild(taskForm);
+};
+
+function renderSubTask (e) {
+  let inputField = e.target.parentElement.querySelector("input");
+  let subTaskTitle = inputField.value;
+  inputField.value = "";
+  let subTaskList = e.target.parentElement.parentElement.querySelector(".subTaskList")
+  let newSubTask = document.createElement("li");
+  newSubTask.classList.add("subTask");
+  newSubTask.textContent = subTaskTitle;
+  subTaskList.appendChild(newSubTask);
+  let currentIndex = Number(e.target.parentElement.parentElement.dataset.indexNumber);
+  console.log(currentIndex);
+  let storedSubTaskList = window.GLOBALS.taskLib[currentIndex].subTasks;
+  console.log(storedSubTaskList);
+  storedSubTaskList.push(subTaskTitle);
+  saveList();
+  e.target.parentElement.remove();
+};
+
 // temp functions
 function testTasks () {
   let task1 = createTask("Wash the dishes", getOrderNum());
@@ -157,6 +206,7 @@ function createTask (title, orderNum) {
   return {
     title: title,
     order: orderNum,
+    subTasks: []
   };
 };
 
@@ -168,6 +218,7 @@ function saveList () {
   const stringified = JSON.stringify(currentList);
   // save to local storage
   localStorage.setItem("taskList", stringified);
+  console.log("List Saved...");
 };
 
 function loadList () {
