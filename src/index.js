@@ -4,14 +4,21 @@ import window from "./tasks";
 
 // grab html elements
 let subBtn = document.getElementById("addBtn");
+let tInput = document.getElementById("taskTitle");
 
 // event listeners
 subBtn.addEventListener("click", () => {
   let newTask = createTask(getTitle(), getOrderNum());
   pushToLib(newTask);
   saveList();
-  console.log(window.GLOBALS.taskLib);
   renderList(window.GLOBALS.taskLib);
+});
+
+tInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("addBtn").click();
+  };
 });
 
 // app functions
@@ -22,7 +29,6 @@ function tabSwitch () {
 
 function getTitle () {
   let tTitle = document.getElementById("taskTitle").value;
-  console.log(tTitle);
   clearTitle();
   return tTitle;
 };
@@ -35,9 +41,15 @@ function getOrderNum () {
   return (window.GLOBALS.taskLib.length + 1);
 };
 
+function updateOrder (lib) {
+  const libLength = lib.length;
+  for (let i = 0; i < libLength; i++) {
+    lib[i].order = (i + 1);
+  };
+};
+
 function pushToLib (taskObject) {
   window.GLOBALS.taskLib.push(taskObject);
-  console.log(window.GLOBALS.taskLib);
 };
 
 function renderTask (taskObject) {
@@ -78,6 +90,7 @@ function renderTask (taskObject) {
 
   let delBtn = document.createElement("button");
   delBtn.textContent = "Delete";
+  delBtn.addEventListener("click", removeTask);
   taskDiv.appendChild(delBtn);
 };
 
@@ -119,6 +132,15 @@ function taskDn (event) {
   };
 };
 
+function removeTask (event) {
+  const currentIndex = Number(event.target.parentElement.dataset.indexNumber);
+  window.GLOBALS.taskLib.splice(currentIndex, 1);
+  updateOrder(window.GLOBALS.taskLib);
+  saveList();
+  renderList(window.GLOBALS.taskLib);
+};
+
+// temp functions
 function testTasks () {
   let task1 = createTask("Wash the dishes", getOrderNum());
   pushToLib(task1);
@@ -156,8 +178,6 @@ function loadList () {
   // overwrite current list
   window.GLOBALS.taskLib = parsedList;
 };
-
-function updateList () {};
 
 // autoload storage
 if (!localStorage.getItem("taskList")) {
