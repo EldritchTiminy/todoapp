@@ -1,25 +1,31 @@
 import {taskLibrary} from "./tasks";
-import {renderList} from "./index";
+import {renderList, renderSubtasks} from "./taskrender";
 import {exampleTasks} from "./examples";
 
 // data storage functions
 function saveList () {
   // temp storage value
-  const currentList = taskLibrary.tasks;
+  const currentTaskList = taskLibrary.tasks;
+  const currentSubtaskList = taskLibrary.subtasks;
   // stringify list
-  const stringified = JSON.stringify(currentList);
+  const stringifiedTasks = JSON.stringify(currentTaskList);
+  const stringifiedSubtasks = JSON.stringify(currentSubtaskList);
   // save to local storage
-  localStorage.setItem("taskList", stringified);
+  localStorage.setItem("taskList", stringifiedTasks);
+  localStorage.setItem("subtaskList", stringifiedSubtasks);
   console.log("List Saved...");
 };
 
 function loadList () {
   // load from local storage
-  const savedList = localStorage.getItem("taskList");
+  const savedTaskList = localStorage.getItem("taskList");
+  const savedSubtaskList = localStorage.getItem("subtaskList");
   // parse saved list
-  const parsedList = JSON.parse(savedList);
+  const parsedTaskList = JSON.parse(savedTaskList);
+  const parsedSubtaskList = JSON.parse(savedSubtaskList);
   // overwrite current list
-  taskLibrary.tasks = parsedList;
+  taskLibrary.tasks = parsedTaskList;
+  taskLibrary.subtasks = parsedSubtaskList;
 };
 
 function autoLoadList () {
@@ -28,6 +34,7 @@ function autoLoadList () {
   } else {
     loadList();
     renderList(taskLibrary.tasks);
+    renderSubtasks();
   };
 };
 

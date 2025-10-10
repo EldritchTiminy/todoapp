@@ -1,5 +1,5 @@
-import {renderList, createTask} from "./index";
-import {pushToLib, getOrderNumber} from "./tasks";
+import {renderList} from "./taskrender";
+import {taskLibrary} from "./tasks";
 
 function exampleTasks () {
   let task1 = createTask("Wash the dishes", getOrderNumber());

@@ -1,4 +1,4 @@
-import {renderList} from "./index";
+import {renderList} from "./taskrender";
 import {taskLibrary} from "./tasks";
 
 function taskUp (event) {

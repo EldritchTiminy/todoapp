@@ -1,8 +1,7 @@
 import "./style.css";
-import {taskLibrary, pushToLib, getOrderNumber, updateOrder} from "./tasks";
-import {saveList, autoLoadList} from "./storage";
-import {taskUp, taskDn} from "./movetask";
-import {clrInputVal, getInputVal} from "./formops";
+import {taskLibrary} from "./tasks";
+import {autoLoadList} from "./storage";
+import {addTask} from "./taskrender";
 
 autoLoadList();
 
@@ -19,17 +18,3 @@ tInput.addEventListener("keypress", (e) => {
     document.getElementById("addBtn").click();
   };
 });
-
-// app functions
-
-
-// object constructors
-function createTask (title, orderNum) {
-  return {
-    title: title,
-    order: orderNum,
-    subTasks: []
-  };
-};
-
-export {createTask};
