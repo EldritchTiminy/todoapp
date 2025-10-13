@@ -3,29 +3,17 @@ import {saveList} from "./storage";
 import {taskUp, taskDn} from "./movetask";
 import {clrInputVal, getInputVal} from "./formops";
 
-
 function renderTask (taskObject) {
-  // grab task list element
   let taskList = document.getElementById("taskList");
-  // create task body container
   let taskDiv = createTaskDiv(taskObject);
   taskList.appendChild(taskDiv);
-  // add task label
   taskDiv.appendChild(createOrderLabel(taskObject));
-  // add up-sorting button
   taskDiv.appendChild(createUpSortBtn());
-  // add down-sorting button
   taskDiv.appendChild(createDownSortBtn());
-  // add task text
   taskDiv.appendChild(createTaskText(taskObject));
-  // add subtask list
   taskDiv.appendChild(createSubtaskList());
-  // add subtask button
   taskDiv.appendChild(createSubTaskBtn());
-  // add delete button
   taskDiv.appendChild(createDelBtn());
-  // populating subtask list from library
-  let currentTaskInd = taskObject.index;
 };
 
 function addSubtask (e) {
@@ -40,9 +28,7 @@ function addSubtask (e) {
   console.log(parentIndex);
   taskLibrary.addSubtask(subTaskTitle, parentIndex);
   saveList();
-
   renderSubtasks();
-
   // delete form after input
   e.target.parentElement.remove();
 };
@@ -107,20 +93,6 @@ function removeSubtask (subtaskIndex) {
   renderSubtasks();
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Creates a pop up form to create a subtask when triggered.
 function subTaskForm (e) {
   let taskForm = document.createElement("form");
@@ -137,7 +109,6 @@ function subTaskForm (e) {
   e.target.parentElement.appendChild(taskForm);
 };
 
-
 // enter key functionality for form
 function enterActivate (e) {
   if (e.key === "Enter") {
@@ -145,16 +116,6 @@ function enterActivate (e) {
     e.target.parentElement.querySelector(".submitBtn").click();
   };
 };
-
-
-
-
-
-
-
-
-
-
 
 function renderList (lib) {
   let taskList = document.getElementById("taskList");
@@ -178,10 +139,6 @@ function addTask () {
   saveList();
   renderList(taskLibrary.tasks);
 };
-
-
-
-
 
 // builder functions for creating and returning task sub elements.
 function createTaskDiv (taskObject) {

@@ -13,7 +13,9 @@ function saveList () {
   // save to local storage
   localStorage.setItem("taskList", stringifiedTasks);
   localStorage.setItem("subtaskList", stringifiedSubtasks);
+  /* develblock:start */
   console.log("List Saved...");
+  /* develblock:end */
 };
 
 function loadList () {
@@ -36,6 +38,20 @@ function autoLoadList () {
     renderList(taskLibrary.tasks);
     renderSubtasks();
   };
+  /* develblock:start */
+  console.log("Task List Loaded...");
+  /* develblock:end */
 };
 
-export {saveList, loadList, autoLoadList};
+function clearList () {
+  localStorage.setItem("taskList", []);
+  localStorage.setItem("subtaskList", []);
+  taskLibrary.tasks = [];
+  taskLibrary.subtasks = [];
+  /* develblock:start */
+  console.log("List Cleared...")
+  /* develblock:end */
+  saveList();
+};
+
+export {saveList, loadList, autoLoadList, clearList};

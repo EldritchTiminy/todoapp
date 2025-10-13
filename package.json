@@ -34,6 +34,7 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
-    "latest": "^0.2.0"
+    "latest": "^0.2.0",
+    "webpack-strip-block": "^0.3.0"
   }
 }
