@@ -2,12 +2,9 @@ import {renderList} from "./taskrender";
 import {taskLibrary} from "./tasks";
 
 function exampleTasks () {
-  let task1 = createTask("Wash the dishes", getOrderNumber());
-  pushToLib(task1);
-  let task2 = createTask("Vacuum the livingroom", getOrderNumber());
-  pushToLib(task2);
-  let task3 = createTask("Check the mail", getOrderNumber());
-  pushToLib(task3);
+  taskLibrary.addTask("Example Task: Wash the dishes");;
+  taskLibrary.addTask("Example Task: Vacuum the livingroom");
+  taskLibrary.addTask("Example Task: Check the mail");
   renderList(taskLibrary.tasks);
 };
 

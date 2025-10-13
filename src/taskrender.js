@@ -58,15 +58,15 @@ function renderSubtasks () {
       subtaskUl.innerHTML = "";
       for (let task of subtaskList) {
         if (task.parent === Number(parent.dataset.indexNumber)) {
-          console.log(task.parent);
-          console.log(task.text);
           let subtaskLi = document.createElement("li");
+          subtaskLi.dataset.indexNumber = task.index;
           subtaskLi.classList.add("subtask");
           let subtaskSpan = document.createElement("span");
           subtaskSpan.textContent = task.text;
           let subtaskBtn = document.createElement("button");
           subtaskBtn.type = "button";
           subtaskBtn.textContent = "Delete";
+          subtaskBtn.addEventListener("click", deleteSubtask);
           subtaskLi.appendChild(subtaskSpan);
           subtaskLi.appendChild(subtaskBtn);
           subtaskUl.appendChild(subtaskLi);
@@ -76,15 +76,34 @@ function renderSubtasks () {
   };
 };
 
-// function for deleting a task
-// should remove the task from the task library
-// should remove all of the task's subtasks
-// re-render everything
+function deleteTask (event) {
+  let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
+  console.log(targetIndex);
+  removeTask(targetIndex);
+};
 
-// function for deleting a subtask
-// should remove the subtask from the task library
-// re-render subtasks
+function removeTask (index) {
+  taskLibrary.tasks.splice(index, 1);
+  for (let subtask of taskLibrary.subtasks) {
+    if (subtask.parent === index) {
+      taskLibrary.subtasks.splice(subtask.index, 1);
+    };
+  };
+  saveList();
+  renderList(taskLibrary.tasks);
+  renderSubtasks();
+};
 
+function deleteSubtask (event) {
+  let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
+  removeSubtask(targetIndex);
+};
+
+function removeSubtask (subtaskIndex) {
+  taskLibrary.subtasks.splice(subtaskIndex, 1);
+  saveList()
+  renderSubtasks();
+};
 
 
 
@@ -158,14 +177,6 @@ function addTask () {
   renderList(taskLibrary.tasks);
 };
 
-function removeTask (event) {
-  const currentIndex = Number(event.target.parentElement.dataset.indexNumber);
-  taskLibrary.tasks.splice(currentIndex, 1);
-  //updateOrder(taskLibrary.tasks);
-  taskLibrary.updateOrder();
-  saveList();
-  renderList(taskLibrary.tasks);
-};
 
 
 
@@ -224,7 +235,7 @@ function createSubTaskBtn () {
 function createDelBtn () {
   let delBtn = document.createElement("button");
   delBtn.textContent = "Delete";
-  delBtn.addEventListener("click", removeTask);
+  delBtn.addEventListener("click", deleteTask);
   return delBtn;
 };
 
