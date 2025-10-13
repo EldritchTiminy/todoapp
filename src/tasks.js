@@ -18,9 +18,11 @@ let taskLibrary = {
     };
   },
   updateSubOrder: function () {
-    let leng = this.tasks.length;
-    for (let i = 0; i < leng; i++) {
-      this.subtasks[i].index = (i);
+    let leng = this.subtasks.length;
+    if (this.subtasks) {
+      for (let i = 0; i < leng; i++) {
+        this.subtasks[i].index = (i);
+      };
     };
   },
   addTask: function (text) {

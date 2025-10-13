@@ -89,6 +89,8 @@ function removeTask (index) {
       taskLibrary.subtasks.splice(subtask.index, 1);
     };
   };
+  taskLibrary.updateOrder();
+  taskLibrary.updateSubOrder();
   saveList();
   renderList(taskLibrary.tasks);
   renderSubtasks();
