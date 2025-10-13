@@ -17,19 +17,15 @@ function renderTask (taskObject) {
 };
 
 function addSubtask (e) {
-  // getting sub-task title input
   let inputField = e.target.parentElement.querySelector("input")
   let subTaskTitle = getInputVal(inputField);
   console.log(subTaskTitle);
   clrInputVal(inputField);
-
-  // adding task to subtask library
   let parentIndex = Number(e.target.parentElement.parentElement.dataset.indexNumber);
   console.log(parentIndex);
   taskLibrary.addSubtask(subTaskTitle, parentIndex);
   saveList();
   renderSubtasks();
-  // delete form after input
   e.target.parentElement.remove();
 };
 
@@ -93,7 +89,6 @@ function removeSubtask (subtaskIndex) {
   renderSubtasks();
 };
 
-// Creates a pop up form to create a subtask when triggered.
 function subTaskForm (e) {
   let taskForm = document.createElement("form");
   let textInput = document.createElement("input");
@@ -109,7 +104,6 @@ function subTaskForm (e) {
   e.target.parentElement.appendChild(taskForm);
 };
 
-// enter key functionality for form
 function enterActivate (e) {
   if (e.key === "Enter") {
     e.preventDefault();
@@ -140,7 +134,6 @@ function addTask () {
   renderList(taskLibrary.tasks);
 };
 
-// builder functions for creating and returning task sub elements.
 function createTaskDiv (taskObject) {
   let taskDiv = document.createElement("div");
   taskDiv.classList.add("task");

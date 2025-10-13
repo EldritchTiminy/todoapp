@@ -11,41 +11,30 @@
   --col-bdbg: rgb(77, 88, 99);
 }
 
-/* html body styling */
 body {
-  /* display settings */
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 1fr 10fr;
 }
 
-/* header styling */
 header {
-  /* colors */
   background-color: var(--col-navbg);
-  /* grid layout */
   grid-column: 1/4;
   grid-row: 1/2;
-  /* spacing and alignment */
   padding: 1rem;
   border-bottom: 1px solid black;
 }
 
 nav {
-  /* display settings */
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
-/* main styling */
 main {
-  /* colors */
   background-color: var(--col-bg);
-  /* display settings */
   grid-column: 2/3;
   grid-row: 2/3;
-  /* spacing and alignment */
   border-left: 1px solid black;
   border-right: 1px solid black;
   padding: 1rem 2rem 1rem 2rem;
@@ -56,7 +45,6 @@ main {
 }
 
 form {
-  /* display settings */
   display: flex;
 }
 
@@ -70,19 +58,15 @@ form button {
 
 #taskTitle {
   flex-grow: 1;
-  /* spacing and alignment */
   margin: 0 1rem 0 0;
 }
 
 #taskList {
-  /* spacing and alignment */
   margin: 2rem 0 0 0;
 }
 
 .task {
-  /* colors */
   background-color: var(--col-taskbg);
-  /* spacing and alignment */
   border: 1px solid var(--col-bdbg);
   border-radius: 1rem;
   padding: 1rem;
@@ -90,6 +74,5 @@ form button {
 }
 
 .subTaskList {
-  /* spacing and alignment */
   padding: 0 0 0 2rem;
 }
