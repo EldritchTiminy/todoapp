@@ -19,10 +19,8 @@ function renderTask (taskObject) {
 function addSubtask (e) {
   let inputField = e.target.parentElement.querySelector("input")
   let subTaskTitle = getInputVal(inputField);
-  console.log(subTaskTitle);
   clrInputVal(inputField);
   let parentIndex = Number(e.target.parentElement.parentElement.dataset.indexNumber);
-  console.log(parentIndex);
   taskLibrary.addSubtask(subTaskTitle, parentIndex);
   saveList();
   renderSubtasks();
@@ -33,7 +31,6 @@ function renderSubtasks () {
   let taskContainer = document.getElementById("taskList");
   let subtaskList = taskLibrary.subtasks;
   let parents = taskContainer.querySelectorAll(".task");
-
   if (subtaskList != null) {
     for (let parent of parents) {
       let subtaskUl = parent.querySelector(".subtaskList");
@@ -60,7 +57,6 @@ function renderSubtasks () {
 
 function deleteTask (event) {
   let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
-  console.log(targetIndex);
   removeTask(targetIndex);
 };
 
@@ -85,7 +81,8 @@ function deleteSubtask (event) {
 
 function removeSubtask (subtaskIndex) {
   taskLibrary.subtasks.splice(subtaskIndex, 1);
-  saveList()
+  taskLibrary.updateSubOrder();
+  saveList();
   renderSubtasks();
 };
 
@@ -99,9 +96,21 @@ function subTaskForm (e) {
   submitBtn.textContent = "Add Sub-Task";
   submitBtn.classList.add("submitBtn");
   submitBtn.addEventListener("click", addSubtask);
+  let cancelBtn = document.createElement("button");
+  cancelBtn.type = "button";
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.classList.add("formCancelBtn");
+  cancelBtn.addEventListener("click", cancelForm);
+  taskForm.id = "taskForm";
   taskForm.appendChild(textInput);
   taskForm.appendChild(submitBtn);
+  taskForm.appendChild(cancelBtn);
   e.target.parentElement.appendChild(taskForm);
+  textInput.focus({focusVisible: true});
+};
+
+function cancelForm (e) {
+  e.target.parentElement.remove();
 };
 
 function enterActivate (e) {

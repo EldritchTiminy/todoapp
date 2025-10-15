@@ -18,7 +18,6 @@ function taskDn (event) {
   let currentIndex = Number(event.target.parentElement.dataset.indexNumber);
   let nextIndex = currentIndex + 1;
   let libLen = taskLibrary.tasks.length - 1;
-  console.log(libLen);
   if (currentIndex < libLen) {
     let nextTask = taskLibrary.tasks[nextIndex];
     let currentTask = taskLibrary.tasks[currentIndex];
