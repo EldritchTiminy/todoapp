@@ -10,6 +10,7 @@ function renderTask (taskObject) {
   taskDiv.appendChild(createOrderLabel(taskObject));
   taskDiv.appendChild(createUpSortBtn());
   taskDiv.appendChild(createDownSortBtn());
+  taskDiv.appendChild(createCompBtn());
   taskDiv.appendChild(createTaskText(taskObject));
   taskDiv.appendChild(createSubtaskList());
   taskDiv.appendChild(createSubTaskBtn());
@@ -143,6 +144,11 @@ function addTask () {
   renderList(taskLibrary.tasks);
 };
 
+function completeTask (event) {
+  event.target.parentElement.classList.toggle("complete");
+};
+
+// Page Element Builder Functions
 function createTaskDiv (taskObject) {
   let taskDiv = document.createElement("div");
   taskDiv.classList.add("task");
@@ -195,9 +201,18 @@ function createSubTaskBtn () {
 
 function createDelBtn () {
   let delBtn = document.createElement("button");
+  delBtn.type = "button";
   delBtn.textContent = "Delete";
   delBtn.addEventListener("click", deleteTask);
   return delBtn;
+};
+
+function createCompBtn () {
+  let compBtn = document.createElement("button");
+  compBtn.type = "button";
+  compBtn.textContent = "Complete!";
+  compBtn.addEventListener("click", completeTask);
+  return compBtn;
 };
 
 export {renderTask, renderList, subTaskForm, renderSubtasks, addTask};
