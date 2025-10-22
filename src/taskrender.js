@@ -103,13 +103,7 @@ function deleteTask (event) {
 
 function removeTask (index) {
   taskLibrary.tasks.splice(index, 1);
-  for (let subtask of taskLibrary.subtasks) {
-    if (subtask.parent === index) {
-      taskLibrary.subtasks.splice(subtask.index, 1);
-    };
-  };
   taskLibrary.updateOrder();
-  taskLibrary.updateSubOrder();
   if (taskLibrary.autoSave) {
     saveList();
   };

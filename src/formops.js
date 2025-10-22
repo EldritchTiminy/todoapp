@@ -88,7 +88,7 @@ function uploadButton() {
     reader.onload = (e) => {
       try {
         const jsonData = e.target.result;
-        localStorage.setItem("taskList", jsonData);
+        localStorage.setItem("todoproj", jsonData);
         autoLoadList();
       } catch (err) {
         console.error("Invalid JSON file:", err);
