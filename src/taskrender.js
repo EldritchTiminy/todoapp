@@ -10,11 +10,12 @@ function renderTask (taskObject) {
   taskDiv.appendChild(createOrderLabel(taskObject));
   taskDiv.appendChild(createUpSortBtn());
   taskDiv.appendChild(createDownSortBtn());
-  taskDiv.appendChild(createCompBtn());
+  taskDiv.appendChild(createCompBtn(taskObject));
   taskDiv.appendChild(createTaskText(taskObject));
   taskDiv.appendChild(createSubtaskList());
   taskDiv.appendChild(createSubTaskBtn());
   taskDiv.appendChild(createDelBtn());
+  renderSubtasks(taskObject);
 };
 
 function addSubtask (e) {
@@ -22,24 +23,58 @@ function addSubtask (e) {
   let subTaskTitle = getInputVal(inputField);
   clrInputVal(inputField);
   let parentIndex = Number(e.target.parentElement.parentElement.dataset.indexNumber);
-  taskLibrary.addSubtask(subTaskTitle, parentIndex);
-  saveList();
-  renderSubtasks();
+  let parentTask = taskLibrary.tasks[parentIndex];
+  parentTask.addSubTask(subTaskTitle);//taskLibrary.addSubtask(subTaskTitle, parentIndex);
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
+  renderSubtasks(parentTask);
   e.target.parentElement.remove();
 };
 
-function renderSubtasks () {
+function renderSubtasks (parentTaskObj) {
+  if (parentTaskObj.subtasks != null) {
+    let parentIndex = parentTaskObj.index;
+    let taskList = document.getElementById("taskList");
+    let parentTask = taskList.querySelector(`div.task[data-index-number="${parentIndex}"]`);
+    console.log(parentTask);
+    let parentUl = parentTask.querySelector(".subtaskList"); 
+    parentUl.innerHTML = "";
+    for (let subtask of parentTaskObj.subtasks) {
+      let subtaskLi = document.createElement("li");
+      subtaskLi.dataset.indexNumber = subtask.index;
+      subtaskLi.classList.add("subtask");
+      let subtaskSpan = document.createElement("span");
+      subtaskSpan.textContent = subtask.text;
+      subtaskLi.appendChild(subtaskSpan);
+      let subtaskDelBtn = document.createElement("button");
+      subtaskDelBtn.type = "button";
+      subtaskDelBtn.textContent = "Delete";
+      subtaskDelBtn.addEventListener("click", deleteSubtask);
+      let subtaskCompBtn = document.createElement("button");
+      subtaskCompBtn.type = "button";
+      subtaskCompBtn.textContent = "Complete";
+      subtaskCompBtn.addEventListener("click", completeSubtask);
+      subtaskLi.appendChild(subtaskSpan);
+      subtaskLi.appendChild(subtaskDelBtn);
+      subtaskLi.appendChild(subtaskCompBtn);
+      parentUl.appendChild(subtaskLi);
+    };
+  };
+};
+
+/*function renderSubtasks (parentTaskObj) {
   let taskContainer = document.getElementById("taskList");
-  let subtaskList = taskLibrary.subtasks;
+  let subtaskList = parentTaskObj.subtasks;
   let parents = taskContainer.querySelectorAll(".task");
   if (subtaskList != null) {
     for (let parent of parents) {
       let subtaskUl = parent.querySelector(".subtaskList");
       subtaskUl.innerHTML = "";
       for (let task of subtaskList) {
-        if (task.parent === Number(parent.dataset.indexNumber)) {
+        //if (task.parent === Number(parent.dataset.indexNumber)) {
           let subtaskLi = document.createElement("li");
-          subtaskLi.dataset.indexNumber = task.index;
+          //subtaskLi.dataset.indexNumber = task.index;
           subtaskLi.classList.add("subtask");
           let subtaskSpan = document.createElement("span");
           subtaskSpan.textContent = task.text;
@@ -47,14 +82,19 @@ function renderSubtasks () {
           subtaskBtn.type = "button";
           subtaskBtn.textContent = "Delete";
           subtaskBtn.addEventListener("click", deleteSubtask);
+          let subtaskCompBtn = document.createElement("button");
+          subtaskCompBtn.type = "button";
+          subtaskCompBtn.textContent = "Complete";
+          subtaskCompBtn.addEventListener("click", completeTask);
           subtaskLi.appendChild(subtaskSpan);
+          subtaskLi.appendChild(subtaskCompBtn);
           subtaskLi.appendChild(subtaskBtn);
           subtaskUl.appendChild(subtaskLi);
         };
       };
     };
   };
-};
+//};*/
 
 function deleteTask (event) {
   let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
@@ -70,21 +110,26 @@ function removeTask (index) {
   };
   taskLibrary.updateOrder();
   taskLibrary.updateSubOrder();
-  saveList();
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
   renderList(taskLibrary.tasks);
-  renderSubtasks();
+  //renderSubtasks();
 };
 
 function deleteSubtask (event) {
   let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
-  removeSubtask(targetIndex);
+  let parentIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
+  removeSubtask(parentIndex, targetIndex);
 };
 
-function removeSubtask (subtaskIndex) {
-  taskLibrary.subtasks.splice(subtaskIndex, 1);
-  taskLibrary.updateSubOrder();
-  saveList();
-  renderSubtasks();
+function removeSubtask (parentIndex, subtaskIndex) {
+  taskLibrary.tasks[parentIndex].subtasks.splice(subtaskIndex, 1);
+  taskLibrary.tasks[parentIndex].updateSubOrder();
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
+  renderSubtasks(taskLibrary.tasks[parentIndex]);
 };
 
 function subTaskForm (e) {
@@ -128,7 +173,6 @@ function renderList (lib) {
   for (let i = 0; i < l; i++) {
     renderTask(lib[i]);
   };
-  renderSubtasks();
 };
 
 function getTitle () {
@@ -140,12 +184,51 @@ function getTitle () {
 
 function addTask () {
   taskLibrary.addTask(getTitle());
-  saveList();
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
   renderList(taskLibrary.tasks);
 };
 
 function completeTask (event) {
+  let currentIndex = Number(event.target.parentElement.dataset.indexNumber);
+  if (taskLibrary.tasks[currentIndex].complete != true) {
+    taskLibrary.tasks[currentIndex].complete = true;
+    event.target.textContent = "Un-Complete";
+    event.target.parentElement.classList.add("complete");
+  } else {
+    taskLibrary.tasks[currentIndex].complete = false;
+    event.target.textContent = "Complete";
+    event.target.parentElement.classList.remove("complete");
+  };
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
+  /*
   event.target.parentElement.classList.toggle("complete");
+  if (event.target.parentElement.classList.contains("complete")) {
+    event.target.textContent = "Un-Complete";
+  } else {
+    event.target.textContent = "Complete";
+  };
+  */
+};
+
+function completeSubtask (event) {
+  let subtaskIndex = Number(event.target.parentElement.dataset.indexNumber);
+  let parentTaskIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
+  if (taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete != true) {
+    taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete = true;
+    event.target.textContent = "Un-Complete";
+    event.target.parentElement.classList.add("complete");
+  } else {
+    taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete = false;
+    event.target.textContent = "Complete";
+    event.target.parentElement.classList.remove("complete");
+  };
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
 };
 
 // Page Element Builder Functions
@@ -207,10 +290,14 @@ function createDelBtn () {
   return delBtn;
 };
 
-function createCompBtn () {
+function createCompBtn (taskObject) {
   let compBtn = document.createElement("button");
   compBtn.type = "button";
-  compBtn.textContent = "Complete!";
+  if (taskObject.complete != true) {
+    compBtn.textContent = "Complete";
+  } else {
+    compBtn.textContent = "Un-Complete";
+  };
   compBtn.addEventListener("click", completeTask);
   return compBtn;
 };

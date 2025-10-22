@@ -21,9 +21,18 @@
         <h1 id="heading">To-do List</h1>
 
         <form>
-          <input type="text" id="taskTitle">
-          <button type="button" id="addBtn">Add Task</button>
-          <button type="button" id="clrList">Clear All Tasks</button>
+          <div id="newTaskForm">
+            <input type="text" id="taskTitle">
+            <button type="button" id="addBtn">Add Task</button>
+          </div>
+          <div id="formOptions">
+            <button type="button" id="saveBtn">Save List</button>
+            <button type="button" id="autoSaveBtn">Auto-save: off</button>
+            <button type="button">Save List to File</button>
+            <button type="button" disabled>Download Saved List File</button>
+            <button type="button">Load List from file</button>
+            <button type="button" id="clrList">Clear All Tasks</button>
+          </div>
         </form>
         
         <div id="taskList">

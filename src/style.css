@@ -46,9 +46,14 @@ main {
 
 form {
   display: flex;
+  flex-direction: column;
 }
 
-form button {
+#newTaskForm {
+  display: flex;
+}
+
+#newTaskForm > button {
   margin: 0 4px;
 }
 
