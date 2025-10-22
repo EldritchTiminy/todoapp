@@ -1,12 +1,15 @@
 import {taskLibrary} from "./tasks";
 import {addTask, renderList} from "./taskrender";
-import {saveList, loadList, autoLoadList, clearList, autoSaveToggle} from "./storage";
+import {saveList, loadList, autoLoadList, clearList, autoSaveToggle, downloadBlob} from "./storage";
+import {deserialize} from "./serializer";
 
 function loadFormButtons () {
   addTaskButton();
   clearAllTasksButton();
   saveListButton();
   autoSaveButton();
+  downloadButton();
+  uploadButton();
 };
 
 function saveListButton () {
@@ -58,6 +61,41 @@ function autoSaveButton () {
   aSaveBtn.addEventListener("click", () => {
     autoSaveToggle();
     autoSaveSetter();
+  });
+};
+
+function downloadButton () {
+  let downloadBtn = document.getElementById("download");
+  downloadBtn.addEventListener("click", (event) => {
+    downloadBlob();
+  });
+};
+
+function uploadButton() {
+  const hiddenUpload = document.createElement("input");
+  hiddenUpload.type = "file";
+  hiddenUpload.accept = ".json";
+  hiddenUpload.style.display = "none";
+  document.body.appendChild(hiddenUpload);
+  let uploadBtn = document.getElementById("upload");
+  uploadBtn.addEventListener("click", () => {
+    hiddenUpload.click();
+  });
+  hiddenUpload.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (!file) return; // user cancelled
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const jsonData = e.target.result;
+        localStorage.setItem("taskList", jsonData);
+        autoLoadList();
+      } catch (err) {
+        console.error("Invalid JSON file:", err);
+        alert("That file isn't valid!");
+      };
+    };
+    reader.readAsText(file);
   });
 };
 

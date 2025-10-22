@@ -114,7 +114,6 @@ function removeTask (index) {
     saveList();
   };
   renderList(taskLibrary.tasks);
-  //renderSubtasks();
 };
 
 function deleteSubtask (event) {
