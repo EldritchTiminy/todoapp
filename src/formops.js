@@ -1,7 +1,6 @@
 import {taskLibrary} from "./tasks";
 import {addTask, renderList} from "./taskrender";
-import {saveList, loadList, autoLoadList, clearList, autoSaveToggle, downloadBlob} from "./storage";
-import {deserialize} from "./serializer";
+import {saveList, autoLoadList, clearList, autoSaveToggle, downloadBlob} from "./storage";
 
 function loadFormButtons () {
   addTaskButton();
@@ -83,7 +82,7 @@ function uploadButton() {
   });
   hiddenUpload.addEventListener("change", (event) => {
     const file = event.target.files[0];
-    if (!file) return; // user cancelled
+    if (!file) return;
     const reader = new FileReader();
     reader.onload = (e) => {
       try {

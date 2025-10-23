@@ -24,7 +24,7 @@ function addSubtask (e) {
   clrInputVal(inputField);
   let parentIndex = Number(e.target.parentElement.parentElement.dataset.indexNumber);
   let parentTask = taskLibrary.tasks[parentIndex];
-  parentTask.addSubTask(subTaskTitle);//taskLibrary.addSubtask(subTaskTitle, parentIndex);
+  parentTask.addSubTask(subTaskTitle);
   if (taskLibrary.autoSave) {
     saveList();
   };
@@ -62,39 +62,6 @@ function renderSubtasks (parentTaskObj) {
     };
   };
 };
-
-/*function renderSubtasks (parentTaskObj) {
-  let taskContainer = document.getElementById("taskList");
-  let subtaskList = parentTaskObj.subtasks;
-  let parents = taskContainer.querySelectorAll(".task");
-  if (subtaskList != null) {
-    for (let parent of parents) {
-      let subtaskUl = parent.querySelector(".subtaskList");
-      subtaskUl.innerHTML = "";
-      for (let task of subtaskList) {
-        //if (task.parent === Number(parent.dataset.indexNumber)) {
-          let subtaskLi = document.createElement("li");
-          //subtaskLi.dataset.indexNumber = task.index;
-          subtaskLi.classList.add("subtask");
-          let subtaskSpan = document.createElement("span");
-          subtaskSpan.textContent = task.text;
-          let subtaskBtn = document.createElement("button");
-          subtaskBtn.type = "button";
-          subtaskBtn.textContent = "Delete";
-          subtaskBtn.addEventListener("click", deleteSubtask);
-          let subtaskCompBtn = document.createElement("button");
-          subtaskCompBtn.type = "button";
-          subtaskCompBtn.textContent = "Complete";
-          subtaskCompBtn.addEventListener("click", completeTask);
-          subtaskLi.appendChild(subtaskSpan);
-          subtaskLi.appendChild(subtaskCompBtn);
-          subtaskLi.appendChild(subtaskBtn);
-          subtaskUl.appendChild(subtaskLi);
-        };
-      };
-    };
-  };
-//};*/
 
 function deleteTask (event) {
   let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
@@ -197,14 +164,6 @@ function completeTask (event) {
   if (taskLibrary.autoSave) {
     saveList();
   };
-  /*
-  event.target.parentElement.classList.toggle("complete");
-  if (event.target.parentElement.classList.contains("complete")) {
-    event.target.textContent = "Un-Complete";
-  } else {
-    event.target.textContent = "Complete";
-  };
-  */
 };
 
 function completeSubtask (event) {
