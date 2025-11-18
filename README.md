@@ -7,7 +7,6 @@ A simple web app for tracking to-do list items. Users can create to-do list task
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Tech Stack](#tech-stack)
-- [Contributing](#contributing)
 
 ## Features
 - Add Tasks
