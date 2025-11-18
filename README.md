@@ -7,6 +7,7 @@ A simple web app for tracking to-do list items. Users can create to-do list task
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Tech Stack](#tech-stack)
+- [Roadmap](#roadmap)
 
 ## Features
 - Add Tasks
@@ -64,6 +65,7 @@ A simple web app for tracking to-do list items. Users can create to-do list task
 ### Supporting Tools
 - **Node.js (v24)**
 - **npm (v11)**
+- **webpack (v5)**
 
 ## Roadmap
 - [x] Initial project setup
