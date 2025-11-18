@@ -41,6 +41,7 @@ A simple web app for tracking to-do list items. Users can create to-do list task
   - Mark a task as finished by clicking "Complete"
 
   ## Project Structure
+  ```bash
   src/
     examples.js
     formops.js
@@ -52,6 +53,7 @@ A simple web app for tracking to-do list items. Users can create to-do list task
     tasks.js
     template.html
     style.css
+```
 
   ## Tech Stack
 
