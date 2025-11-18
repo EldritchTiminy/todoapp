@@ -1,6 +1,6 @@
 import "./style.css";
-import {autoLoadList} from "./storage";
-import {loadFormButtons} from "./formops";
+import {autoLoadList} from "./modules/storage";
+import {loadFormButtons} from "./modules/formops";
 
 autoLoadList();
 

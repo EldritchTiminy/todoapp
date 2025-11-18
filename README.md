@@ -43,18 +43,26 @@ A simple web app for tracking to-do list items. Users can create to-do list task
   ## Project Structure
   ```bash
   src/
-    examples.js
-    formops.js
-    index.js
-    movetask.js
-    serializer.js
-    storeage.js
-    taskrender.js
-    tasks.js
+    index.js # entry point
     template.html
     style.css
+    modules/
+      examples.js
+      formops.js
+      movetask.js
+      serializer.js
+      storeage.js
+      taskrender.js
+      tasks.js
 ```
 
-  ## Tech Stack
+## Tech Stack
 
-  ## Contributing
+### Core
+- **JavaScript (ES6+)**
+
+### Supporting Tools
+- **Node.js (v24)**
+- **npm (v11)
+
+## Contributing
