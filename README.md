@@ -15,6 +15,7 @@ A simple web app for tracking to-do list items. Users can create to-do list task
 - Delete tasks
 - Rearrange tasks
 - Modular Components
+- Utilizes Web Storage API to automatically save your tasks
 
 ## Installation
 1. Clone the repository
@@ -64,5 +65,3 @@ A simple web app for tracking to-do list items. Users can create to-do list task
 ### Supporting Tools
 - **Node.js (v24)**
 - **npm (v11)**
-
-## Contributing
