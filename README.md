@@ -32,3 +32,27 @@ A simple web app for tracking to-do list items. Users can create to-do list task
   ```bash
   npm run dev
   ```
+
+  ## Usage
+  - Type the title of task into the input field and hit "enter" or click "Add Task".
+  - Click "Delete" to delete a task.
+  - Add subtasks to a task by clicking the "Add Subtask" button under any task.
+  - Prioritize by rearranging your tasks using the "Move Up" or "Move Down" buttons.
+  - Mark a task as finished by clicking "Complete"
+
+  ## Project Structure
+  src/
+    examples.js
+    formops.js
+    index.js
+    movetask.js
+    serializer.js
+    storeage.js
+    taskrender.js
+    tasks.js
+    template.html
+    style.css
+
+  ## Tech Stack
+
+  ## Contributing
