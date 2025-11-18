@@ -63,6 +63,6 @@ A simple web app for tracking to-do list items. Users can create to-do list task
 
 ### Supporting Tools
 - **Node.js (v24)**
-- **npm (v11)
+- **npm (v11)**
 
 ## Contributing
