@@ -21,9 +21,14 @@ A simple web app for tracking to-do list items. Users can create to-do list task
   ```bash
   git clone https://github.com/EldritchTiminy/todoapp.git
   cd todoapp
+  ```
 
 2. Install dependencies
+  ```bash
   npm install
+  ```
 
 3. Start the developement server
+  ```bash
   npm run dev
+  ```
