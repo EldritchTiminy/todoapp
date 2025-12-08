@@ -72,5 +72,6 @@ A simple web app for tracking to-do list items. Users can create to-do list task
 - [x] Basic Functionality
 - [x] Implement Web Storage API
 - [ ] Clean user interface and stylesheet
+- [ ] Add mobile styling
 - [ ] Implement tracking multiple lists
 - [ ] New: Learned Jest - Add Jest Testing
