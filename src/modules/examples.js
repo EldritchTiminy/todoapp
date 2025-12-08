@@ -1,5 +1,5 @@
 import {renderList} from "./taskrender";
-import {taskLibrary} from "./tasks";
+import taskLibrary from "./tasks";
 
 function exampleTasks () {
   taskLibrary.addTask("Example Task: Wash the dishes");;
@@ -8,4 +8,4 @@ function exampleTasks () {
   renderList(taskLibrary.tasks);
 };
 
-export {exampleTasks};
+export default exampleTasks;

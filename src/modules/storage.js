@@ -1,6 +1,6 @@
-import {taskLibrary} from "./tasks";
+import taskLibrary from "./tasks";
 import {renderList} from "./taskrender";
-import {exampleTasks} from "./examples";
+import exampleTasks from "./examples";
 import {autoSaveSetter} from "./formops";
 import {serialize, deserialize} from "./serializer";
 

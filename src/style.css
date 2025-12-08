@@ -7,7 +7,7 @@
 
 :root {
   --col-bg: rgb(15, 112, 209);
-  --col-navbg: rgb(200 200 200);
+  --col-navbg: rgba(0, 0, 0, 0.8);
   --col-taskbg: rgb(153, 176, 197);
   --col-bdbg: rgb(77, 88, 99);
   --col-compl: rgb(0 200 0);
@@ -17,45 +17,67 @@
 /* main over-arching settings */
 
 body {
+  background-color: var(--col-bodybg);
   min-height: 100vh;
   display: grid;
   grid-template-columns: 6fr 1fr 60% 1fr 6fr;
-  grid-template-rows: 50px 1fr;
-}
-
-header {
-  background-color: var(--col-navbg);
-  grid-column: 1/6;
-  grid-row: 1/2;
-  padding: 1rem;
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-/* decorative gradient strips */
-#decostripleft {
-  grid-column: 2/3;
-  background-image: linear-gradient(to right, white, var(--col-bg));
-}
-
-#decostripright {
-  grid-column: 4/5;
-  background-image: linear-gradient(to right, var(--col-bg), white);
 }
 
 main {
   background-color: var(--col-bg);
   grid-column: 3/4;
-  grid-row: 2/3;
+  grid-row: 1/2;
   padding: 0 2rem 0 2rem;
 }
 
+/* navbar settings */
+.sideNav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+.sideNav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.sideNav a:hover {
+  color: #f1f1f1;
+}
+/* Position and style the close button (top right corner) */
+.sideNav #closeBtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#content {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sideNav {padding-top: 15px;}
+  .sideNav a {font-size: 18px;}
+}
+/**/
+
+
 /* content settings */
 #heading {
+  color: white;
   text-align: center;
   padding: 1rem;
 }
@@ -77,9 +99,11 @@ form {
   flex-grow: 0;
 }
 
+/* has to be declared in the html for the button to work first click?
 #formOptions {
   display: none;
 }
+*/
 
 /* task style settings */
 #taskTitle {

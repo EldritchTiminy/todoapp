@@ -8,17 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header>
-      <!--<nav>
-        <button>New List</button>
-        <button>Change Lists</button>
-      </nav> -->
-    </header>
-
-    <div id="decostripleft"></div>
-    <div id="decostripright"></div>
+    <div id="sideNav" class="sideNav">
+      <a href="javascript:void(0)" id="closeBtn">&times;</a>
+      <a href="#">Home</a>
+      <a href="#">New List</a>
+      <a href="#">Contact</a>
+    </div>
     
     <main id="content">
+
+      <button type="button" id="navToggle">Menu</button>
+
       <div>
 
         <h1 id="heading">To-do List</h1>
@@ -29,7 +29,7 @@
             <button type="button" id="addBtn">Add Task</button>
             <button type="button" id="setBtn">Settings</button>
           </div>
-          <div id="formOptions">
+          <div id="formOptions" style="display: none">
             <button type="button" id="saveBtn">Save List</button>
             <button type="button" id="autoSaveBtn">Auto-save: off</button>
             <button type="button" id="download">Download Saved List File</button>

@@ -1,4 +1,4 @@
-import {taskLibrary} from "./tasks";
+import taskLibrary from "./tasks";
 import {addTask, renderList} from "./taskrender";
 import {saveList, autoLoadList, clearList, autoSaveToggle, downloadBlob} from "./storage";
 import toggleSettings from "./togglemenu";

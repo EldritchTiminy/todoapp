@@ -1,5 +1,5 @@
 import {renderList} from "./taskrender";
-import {taskLibrary} from "./tasks";
+import taskLibrary from "./tasks";
 import {saveList} from "./storage";
 
 function taskUp (event) {

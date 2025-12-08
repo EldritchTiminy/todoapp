@@ -1,4 +1,4 @@
-let taskLibrary = {
+const taskLibrary = {
   tasks: [],
   getOrder: function () {
     return this.tasks.length;
@@ -48,4 +48,4 @@ let taskLibrary = {
   autoSave: false,
 };
 
-export {taskLibrary};
+export default taskLibrary;

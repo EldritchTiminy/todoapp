@@ -1,4 +1,4 @@
-import {taskLibrary} from "./tasks";
+import taskLibrary from "./tasks";
 import {saveList} from "./storage";
 import {taskUp, taskDn} from "./movetask";
 import {clrInputVal, getInputVal} from "./formops";
