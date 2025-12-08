@@ -9,12 +9,15 @@
   --col-navbg: rgb(200 200 200);
   --col-taskbg: rgb(153, 176, 197);
   --col-bdbg: rgb(77, 88, 99);
+  --col-compl: rgb(0 200 0);
+  --col-compl2: rgb(0 150 0);
 }
 
 body {
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 50px 1fr;
 }
 
 header {
@@ -37,11 +40,12 @@ main {
   grid-row: 2/3;
   border-left: 1px solid black;
   border-right: 1px solid black;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 0 2rem 0 2rem;
 }
 
 #heading {
   text-align: center;
+  padding: 1rem;
 }
 
 form {
@@ -78,6 +82,31 @@ form {
   margin: 0 0 .4rem 0;
 }
 
-.subTaskList {
+.subtaskList {
   padding: 0 0 0 2rem;
+  list-style-type: none;
+}
+
+li.subtask {
+  padding: 4px;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  display: flex;
+}
+
+li.subtask > span {
+  flex-grow: 1;
+}
+
+/* conditional formatting classes */
+.complete {
+  background-color: var(--col-compl);
+}
+
+li.complete {
+  background-color: var(--col-compl2);
+}
+
+li.complete > span {
+  text-decoration: line-through;
 }
