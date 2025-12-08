@@ -7,14 +7,19 @@ function renderTask (taskObject) {
   let taskList = document.getElementById("taskList");
   let taskDiv = createTaskDiv(taskObject);
   taskList.appendChild(taskDiv);
-  taskDiv.appendChild(createOrderLabel(taskObject));
-  taskDiv.appendChild(createUpSortBtn());
-  taskDiv.appendChild(createDownSortBtn());
-  taskDiv.appendChild(createCompBtn(taskObject));
-  taskDiv.appendChild(createTaskText(taskObject));
-  taskDiv.appendChild(createSubtaskList());
-  taskDiv.appendChild(createSubTaskBtn());
-  taskDiv.appendChild(createDelBtn());
+  let components = [
+    createOrderLabel(taskObject),
+    createUpSortBtn(),
+    createDownSortBtn(),
+    createCompBtn(taskObject),
+    createTaskText(taskObject),
+    createSubtaskList(),
+    createSubtaskBtn(),
+    createDelBtn()
+  ];
+  for (let comp of components) {
+    taskDiv.appendChild(comp);
+  };
   renderSubtasks(taskObject);
 };
 
@@ -41,26 +46,31 @@ function renderSubtasks (parentTaskObj) {
     let parentUl = parentTask.querySelector(".subtaskList"); 
     parentUl.innerHTML = "";
     for (let subtask of parentTaskObj.subtasks) {
-      let subtaskLi = document.createElement("li");
-      subtaskLi.dataset.indexNumber = subtask.index;
-      subtaskLi.classList.add("subtask");
-      let subtaskSpan = document.createElement("span");
-      subtaskSpan.textContent = subtask.text;
-      subtaskLi.appendChild(subtaskSpan);
-      let subtaskDelBtn = document.createElement("button");
-      subtaskDelBtn.type = "button";
-      subtaskDelBtn.textContent = "Delete";
-      subtaskDelBtn.addEventListener("click", deleteSubtask);
-      let subtaskCompBtn = document.createElement("button");
-      subtaskCompBtn.type = "button";
-      subtaskCompBtn.textContent = "Complete";
-      subtaskCompBtn.addEventListener("click", completeSubtask);
-      subtaskLi.appendChild(subtaskSpan);
-      subtaskLi.appendChild(subtaskDelBtn);
-      subtaskLi.appendChild(subtaskCompBtn);
+      let subtaskLi = createSubtask(subtask);
       parentUl.appendChild(subtaskLi);
     };
   };
+};
+
+function createSubtask (subtask) {
+  let subtaskLi = document.createElement("li");
+  subtaskLi.dataset.indexNumber = subtask.index;
+  subtaskLi.classList.add("subtask");
+  let subtaskSpan = document.createElement("span");
+  subtaskSpan.textContent = subtask.text;
+  subtaskLi.appendChild(subtaskSpan);
+  let subtaskDelBtn = document.createElement("button");
+  subtaskDelBtn.type = "button";
+  subtaskDelBtn.textContent = "Delete";
+  subtaskDelBtn.addEventListener("click", deleteSubtask);
+  let subtaskCompBtn = document.createElement("button");
+  subtaskCompBtn.type = "button";
+  subtaskCompBtn.textContent = "Complete";
+  subtaskCompBtn.addEventListener("click", completeSubtask);
+  subtaskLi.appendChild(subtaskSpan);
+  subtaskLi.appendChild(subtaskDelBtn);
+  subtaskLi.appendChild(subtaskCompBtn);
+  return subtaskLi;
 };
 
 function deleteTask (event) {
@@ -227,7 +237,7 @@ function createSubtaskList () {
   return subTaskList;
 };
 
-function createSubTaskBtn () {
+function createSubtaskBtn () {
   let subTaskBtn = document.createElement("button");
   subTaskBtn.textContent = "Add Sub-task";
   subTaskBtn.addEventListener("click", subTaskForm);

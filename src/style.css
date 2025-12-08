@@ -77,6 +77,11 @@ form {
   flex-grow: 0;
 }
 
+#formOptions {
+  display: none;
+}
+
+/* task style settings */
 #taskTitle {
   flex-grow: 1;
   margin: 0 1rem 0 0;
@@ -85,6 +90,7 @@ form {
 #taskList {
   margin: 2rem 0 0 0;
 }
+
 
 .task {
   background-color: var(--col-taskbg);

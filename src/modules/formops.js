@@ -1,6 +1,7 @@
 import {taskLibrary} from "./tasks";
 import {addTask, renderList} from "./taskrender";
 import {saveList, autoLoadList, clearList, autoSaveToggle, downloadBlob} from "./storage";
+import toggleSettings from "./togglemenu";
 
 function loadFormButtons () {
   addTaskButton();
@@ -9,6 +10,12 @@ function loadFormButtons () {
   autoSaveButton();
   downloadButton();
   uploadButton();
+  toggleSettingsButton();
+};
+
+function toggleSettingsButton () {
+  let setBtn = document.getElementById("setBtn");
+  setBtn.addEventListener("click", toggleSettings);
 };
 
 function saveListButton () {
