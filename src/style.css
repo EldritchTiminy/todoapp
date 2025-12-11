@@ -6,31 +6,97 @@
 }
 
 :root {
-  --col-bg: rgb(15, 112, 209);
+  --col-bg: #222 /*rgb(15, 112, 209)*/;
   --col-navbg: rgba(0, 0, 0, 0.8);
-  --col-taskbg: rgb(153, 176, 197);
+  --col-taskbg: rgb(100, 100, 100);
   --col-bdbg: rgb(77, 88, 99);
   --col-compl: rgb(0 200 0);
   --col-compl2: rgb(0 150 0);
+  /** Base colors */
+  --clr-dark-a0: #000000;
+  --clr-light-a0: #ffffff;
+
+  /** Theme primary colors */
+  --clr-primary-a0: #a0fd1b;
+  --clr-primary-a10: #aefe47;
+  --clr-primary-a20: #bafe64;
+  --clr-primary-a30: #c6ff7d;
+  --clr-primary-a40: #d1ff94;
+  --clr-primary-a50: #dbffaa;
+
+  /** Theme surface colors */
+  --clr-surface-a0: #121212;
+  --clr-surface-a10: #282828;
+  --clr-surface-a20: #3f3f3f;
+  --clr-surface-a30: #575757;
+  --clr-surface-a40: #717171;
+  --clr-surface-a50: #8b8b8b;
+
+  /** Theme tonal surface colors */
+  --clr-surface-tonal-a0: #202618;
+  --clr-surface-tonal-a10: #353a2d;
+  --clr-surface-tonal-a20: #4b5044;
+  --clr-surface-tonal-a30: #62675c;
+  --clr-surface-tonal-a40: #7a7e75;
+  --clr-surface-tonal-a50: #93978f;
+
+  /** Success colors */
+  --clr-success-a0: #22946e;
+  --clr-success-a10: #47d5a6;
+  --clr-success-a20: #9ae8ce;
+
+  /** Warning colors */
+  --clr-warning-a0: #a87a2a;
+  --clr-warning-a10: #d7ac61;
+  --clr-warning-a20: #ecd7b2;
+
+  /** Danger colors */
+  --clr-danger-a0: #9c2121;
+  --clr-danger-a10: #d94a4a;
+  --clr-danger-a20: #eb9e9e;
+
+  /** Info colors */
+  --clr-info-a0: #21498a;
+  --clr-info-a10: #4077d1;
+  --clr-info-a20: #92b2e5;
 }
 
 /* main over-arching settings */
 
 body {
-  background-color: var(--col-bodybg);
+  background-color: var(--clr-surface-tonal-a0);
   min-height: 100vh;
   display: grid;
   grid-template-columns: 6fr 1fr 60% 1fr 6fr;
 }
 
 main {
-  background-color: var(--col-bg);
+  background-color: var(--clr-surface-a0);
   grid-column: 3/4;
   grid-row: 1/2;
   padding: 0 2rem 0 2rem;
 }
 
 /* navbar settings */
+#navToggle {
+  width: 100%;
+}
+.navToggle {
+  background-color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  width: 24px;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+.navToggle:hover {
+  background-color: #333;
+}
+.navToggle:active {
+  background-color: #777;
+}
 .sideNav {
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
