@@ -7,23 +7,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
   </head>
-  <body>
-    <div id="sideNav" class="sideNav">
-      <a href="javascript:void(0)" id="closeBtn">&times;</a>
-      <a href="#">Home</a>
-      <a href="#">New List</a>
-      <a href="#">Contact</a>
-    </div>
+  <body id="body">
+
+    <nav id="nav">
+      <!--#Nav-->
+      <div id="navTitle">
+        <img src={menubtn} id="menuIcon" />
+        <p id="pgTitle">Pocket Docket</p>
+      </div>
+
+      <div id="navLinks">
+        <!--<a href="javascript:void(0)" id="closeBtn">&times;</a>-->
+        <a href="#" class="navLink">Home</a>
+        <a href="#" class="navLink">New List</a>
+        <a href="#" class="navLink">Contact</a>
+      </div>
+    </nav>
     
-    <main id="content">
-      <a href="./themepg.html">Theme/Layout Page Here</a>
-      <div class="navToggle"><img id="navToggle" /></div>
+    <main id="main">
+      <h1 id="title">What's on the docket?</h1>
 
-      <div>
+      <header id="header">
+        <p>List Name: To-do<p>
+      </header>
 
-        <h1 id="heading">To-do List</h1>
+      <div id="completionBar">
+        <p>completion bar goes here</p>
+      </div>
 
-        <form>
+      <div id="content">
+
+        <!--<form>
           <div id="newTaskForm">
             <input type="text" id="taskTitle">
             <button type="button" id="addBtn">Add Task</button>
@@ -36,8 +50,20 @@
             <button type="button" id="upload">Load List from file</button>
             <button type="button" id="clrList">Clear All Tasks</button>
           </div>
-        </form>
+        </form>-->
         
+        <div class="listOptions">
+          <h2>List Options</h2>
+          <h4>Sort Tasks By</h4>
+          <h4>Complete All List Items</h4>
+          <ul>
+            <li>Display Style: simple/detailed</li>
+            <li>Show/hide completion bar</li>
+            <li>Customize completion bar</li>
+            <li>Rename List</li>
+          </ul>
+        </div>
+
         <div id="taskList">
 
           <div class="task">
@@ -54,8 +80,12 @@
           </div>
 
         </div>
-
       </div>
+
+      <footer id="footer">
+        <a href="#">Click here to see the GitHub Repo for this project</a>
+      </footer>
+
     </main>
 
   </body>

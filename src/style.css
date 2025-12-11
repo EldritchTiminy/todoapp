@@ -93,7 +93,7 @@
   margin: 12px 0 12px 0;
 }
 
-#menuicon {
+#menuIcon {
   width: 52px;
   margin: 8px;
 }
@@ -229,7 +229,7 @@ div.taskMain {
 
 div.taskCont {
   grid-column: 1/2;
-  gird-row: 1/2;
+  grid-row: 1/2;
 }
 
 div.taskSide {
