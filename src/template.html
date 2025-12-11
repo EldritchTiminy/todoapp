@@ -67,16 +67,25 @@
         <div id="taskList">
 
           <div class="task">
-            <p class="listOrder">#1</p>
-            <button>Move Up</button>
-            <button>Move Down</button>
-            <p>If you are seeing this, something has gone wrong</p>
-            <ul class="subTaskList">
-              <li>Check render functions.</li>
-              <li>Check storage operations.</li>
-            </ul>
-            <button>Add Sub-task</button>
-            <button>Delete</button>
+            <div class="dragIcon">
+              <img src="./public/drag.svg" class="dragBars" />
+            </div>
+            <div class="taskMain">
+              <div class="taskCont">
+                <header>Task 1 Title</header>
+                <!--<button>Move Up</button>
+                <button>Move Down</button>-->
+                <p>If you are seeing this, something has gone wrong</p>
+                <ul class="stlist">
+                  <li>Check render functions.</li>
+                  <li>Check storage operations.</li>
+                </ul>
+              </div>
+              <div class="taskSide">
+                <div class="addSTDiv"><img src="./public/plus.svg" class="addBtn" /></div>
+                <div class="deleteDiv"><img src="./public/delete.svg" class="deleteBtn" /></div>
+              </div>
+            </div>
           </div>
 
         </div>

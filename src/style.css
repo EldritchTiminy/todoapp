@@ -249,7 +249,8 @@ ul.stlist > li {
   margin-left: 12px;
 }
 
-div.deleteLink {
+div.deleteDiv,
+div.addSTDiv {
   width: 40px;
   height: 40px;
   padding: 4px;
@@ -260,15 +261,18 @@ div.deleteLink {
   align-items: center;
 }
 
-div.deleteLink:hover {
+div.deleteDiv:hover,
+div.addSTDiv:hover {
   background-color: var(--clr-surface-tonal-a50);
 }
 
-div.deleteLink:active {
+div.deleteDiv:active,
+div.addSTDiv:active {
   background-color: var(--clr-light-a0);
 }
 
-img.deleteBtn {
+img.deleteBtn,
+img.addBtn {
   width: 32px;
 }
 
