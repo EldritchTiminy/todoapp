@@ -304,3 +304,12 @@ img.addBtn {
   color: var(--clr-primary-a50);
   text-decoration: none;
 }
+
+#wipDisc {
+  background-color: var(--clr-danger-a20);
+  color: var(--clr-surface-a10);
+  border: 1px solid var(--clr-dark-a0);
+  border-radius: 8px;
+  margin: 8px;
+  padding: 8px;
+}

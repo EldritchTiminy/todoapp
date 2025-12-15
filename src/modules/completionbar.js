@@ -24,6 +24,11 @@ function checkCompletion () {
 
 export default function updateComplete () {
   let completionBar = document.getElementById("completePerc");
-  completionBar.textContent = checkCompletion();
+  let completionPercentage = checkCompletion();
+  if (completionPercentage > 5) {
+    completionBar.textContent = checkCompletion();
+  } else {
+    completionBar.textContent = "";
+  };
   completionBar.style.width = `${checkCompletion()}%`;
 };
