@@ -2,23 +2,43 @@ import taskLibrary from "./tasks";
 import {saveList} from "./storage";
 import {taskUp, taskDn} from "./movetask";
 import {clrInputVal, getInputVal} from "./formops";
+import plus from "../public/plus.svg";
+import drag from "../public/drag.svg";
+import deleteIcon from "../public/delete.svg";
 
 function renderTask (taskObject) {
   let taskList = document.getElementById("taskList");
   let taskDiv = createTaskDiv(taskObject);
   taskList.appendChild(taskDiv);
   let components = [
-    createOrderLabel(taskObject),
-    createUpSortBtn(),
-    createDownSortBtn(),
-    createCompBtn(taskObject),
-    createTaskText(taskObject),
-    createSubtaskList(),
-    createSubtaskBtn(),
-    createDelBtn()
+    createDragBars(),
+    createTaskMainDiv(),
+    //createOrderLabel(taskObject),
+    //createUpSortBtn(),
+    //createDownSortBtn(),
+    //createCompBtn(taskObject),
+    //createTaskText(taskObject),
+    //createSubtaskList(),
+    //createSubtaskBtn(),
+    //createDelBtn()
   ];
   for (let comp of components) {
     taskDiv.appendChild(comp);
+  };
+  let population = [
+    createTaskHeader(taskObject),
+    createTaskDesc(taskObject),
+    createSubtaskList(),
+  ];
+  for (let content of population) {
+    taskDiv.querySelector("div.taskCont").appendChild(content);
+  };
+  let buttons = [
+    createSubtaskBtn(),
+    createDelBtn(),
+  ];
+  for (let button of buttons) {
+    taskDiv.querySelector("div.taskSide").appendChild(button);
   };
   renderSubtasks(taskObject);
 };
@@ -43,7 +63,7 @@ function renderSubtasks (parentTaskObj) {
     let taskList = document.getElementById("taskList");
     let parentTask = taskList.querySelector(`div.task[data-index-number="${parentIndex}"]`);
     console.log(parentTask);
-    let parentUl = parentTask.querySelector(".subtaskList"); 
+    let parentUl = parentTask.querySelector(".stlist"); 
     parentUl.innerHTML = "";
     for (let subtask of parentTaskObj.subtasks) {
       let subtaskLi = createSubtask(subtask);
@@ -224,23 +244,33 @@ function createDownSortBtn () {
   return dnBtn;
 };
 
-function createTaskText (taskObject) {
+function createTaskDesc (taskObject) {
   let tTitle = document.createElement("p");
-  tTitle.textContent = taskObject.text;
+  tTitle.textContent = "description..."; //taskObject.text;
   tTitle.classList.add("primaryTask");
   return tTitle;
 };
 
 function createSubtaskList () {
   let subTaskList = document.createElement("ul");
-  subTaskList.classList.add("subtaskList");
+  subTaskList.classList.add("stlist");
   return subTaskList;
 };
 
-function createSubtaskBtn () {
+/*function createSubtaskBtn () {
   let subTaskBtn = document.createElement("button");
   subTaskBtn.textContent = "Add Sub-task";
   subTaskBtn.addEventListener("click", subTaskForm);
+  return subTaskBtn;
+};*/
+
+function createSubtaskBtn () {
+  let subTaskBtn = document.createElement("div");
+  subTaskBtn.classList.add("addSTDiv");
+  let subTaskIcon = document.createElement("img");
+  subTaskIcon.src = plus;
+  subTaskIcon.classList.add("addBtn");
+  subTaskBtn.appendChild(subTaskIcon);
   return subTaskBtn;
 };
 
@@ -262,6 +292,34 @@ function createCompBtn (taskObject) {
   };
   compBtn.addEventListener("click", completeTask);
   return compBtn;
+};
+
+function createDragBars () {
+  let dragDiv = document.createElement("div");
+  dragDiv.classList.add("dragIcon");
+  let dragImg = document.createElement("img");
+  dragImg.src = drag;
+  dragImg.classList.add("dragBars");
+  dragDiv.appendChild(dragImg);
+  return dragDiv;
+};
+
+function createTaskMainDiv () {
+  let taskMain = document.createElement("div");
+  taskMain.classList.add("taskMain");
+  let taskCont = document.createElement("div");
+  taskCont.classList.add("taskCont");
+  let taskSide = document.createElement("div");
+  taskSide.classList.add("taskSide");
+  taskMain.appendChild(taskCont);
+  taskMain.appendChild(taskSide);
+  return taskMain;
+};
+
+function createTaskHeader (taskObject) {
+  let taskHeader = document.createElement("header");
+  taskHeader.textContent = taskObject.text;
+  return taskHeader;
 };
 
 export {renderTask, renderList, subTaskForm, renderSubtasks, addTask};

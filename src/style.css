@@ -169,12 +169,17 @@ a.navLink:hover {
   flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
+  grid-template-rows: 32px 1fr;
+}
+
+form.taskForm {
+  grid-row: 1/2;
+  grid-column: 1/5;
 }
 
 div.listOptions {
   grid-column: 4/5;
-  grid-row: 1/2;
+  grid-row: 2/3;
   border-left: 1px solid var(--clr-surface-a30);
   padding: 8px;
 }
@@ -190,7 +195,7 @@ div.listOptions > ul > li {
 /* task style settings */
 #taskList {
   grid-column: 1/4;
-  grid-row: 1/2;
+  grid-row: 2/3;
 }
 
 div.task {
