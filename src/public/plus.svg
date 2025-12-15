@@ -5,7 +5,7 @@
 
 <defs>
 
-<style>.cls-1{fill:none;stroke:#a0fd1b;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style>
+<style>.cls-1{fill:none;stroke:#a0fd1b;stroke-linecap:round;stroke-linejoin:round;stroke-width:4px;}</style>
 
 </defs>
 
@@ -13,9 +13,9 @@
 
 <g id="plus">
 
-<line class="cls-1" x1="16" x2="16" y1="7" y2="25"/>
+<line class="cls-1" x1="16" x2="16" y1="6" y2="26"/>
 
-<line class="cls-1" x1="7" x2="25" y1="16" y2="16"/>
+<line class="cls-1" x1="6" x2="26" y1="16" y2="16"/>
 
 </g>
 

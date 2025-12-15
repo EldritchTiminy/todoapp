@@ -223,7 +223,7 @@ div.taskMain {
   grid-row: 1/2;
   padding: 8px;
   display: grid;
-  grid-template-columns: 1fr 52px;
+  grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr;
 }
 
@@ -237,8 +237,8 @@ div.taskSide {
   grid-row: 1/2;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 div.taskCont > header {
