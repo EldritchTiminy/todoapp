@@ -157,8 +157,17 @@ a.navLink:hover {
 }
 
 #completionBar {
-  background-color: var(--clr-primary-a0);
+  background-color: var(--clr-surface-a0);
   height: 28px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#completePerc {
+  background-color: var(--clr-primary-a0);
+  width: 0px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

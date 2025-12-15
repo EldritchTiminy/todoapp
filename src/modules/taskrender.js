@@ -4,7 +4,8 @@ import {taskUp, taskDn} from "./movetask";
 import {clrInputVal, getInputVal} from "./formops";
 import plus from "../public/plus.svg";
 import drag from "../public/drag.svg";
-import deleteIcon from "../public/delete.svg";
+import trash from "../public/trash.svg";
+import updateComplete from "./completionbar";
 
 function renderTask (taskObject) {
   let taskList = document.getElementById("taskList");
@@ -12,7 +13,7 @@ function renderTask (taskObject) {
   taskList.appendChild(taskDiv);
   let components = [
     createDragBars(),
-    createTaskMainDiv(),
+    createTaskMainDiv(taskObject),
     //createOrderLabel(taskObject),
     //createUpSortBtn(),
     //createDownSortBtn(),
@@ -29,6 +30,7 @@ function renderTask (taskObject) {
     createTaskHeader(taskObject),
     createTaskDesc(taskObject),
     createSubtaskList(),
+    createCompBtn(taskObject),
   ];
   for (let content of population) {
     taskDiv.querySelector("div.taskCont").appendChild(content);
@@ -181,7 +183,7 @@ function addTask () {
 };
 
 function completeTask (event) {
-  let currentIndex = Number(event.target.parentElement.dataset.indexNumber);
+  let currentIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
   if (taskLibrary.tasks[currentIndex].complete != true) {
     taskLibrary.tasks[currentIndex].complete = true;
     event.target.textContent = "Un-Complete";
@@ -194,6 +196,7 @@ function completeTask (event) {
   if (taskLibrary.autoSave) {
     saveList();
   };
+  updateComplete();
 };
 
 function completeSubtask (event) {
@@ -211,6 +214,7 @@ function completeSubtask (event) {
   if (taskLibrary.autoSave) {
     saveList();
   };
+  updateComplete();
 };
 
 // Page Element Builder Functions
@@ -271,13 +275,25 @@ function createSubtaskBtn () {
   subTaskIcon.src = plus;
   subTaskIcon.classList.add("addBtn");
   subTaskBtn.appendChild(subTaskIcon);
+  subTaskBtn.addEventListener("click", subTaskForm);
   return subTaskBtn;
 };
 
-function createDelBtn () {
+/*function createDelBtn () {
   let delBtn = document.createElement("button");
   delBtn.type = "button";
   delBtn.textContent = "Delete";
+  delBtn.addEventListener("click", deleteTask);
+  return delBtn;
+};*/
+
+function createDelBtn () {
+  let delBtn = document.createElement("div");
+  delBtn.classList.add("deleteDiv");
+  let deleteIcon = document.createElement("img");
+  deleteIcon.src = trash;
+  deleteIcon.classList.add("deleteBtn");
+  delBtn.appendChild(deleteIcon);
   delBtn.addEventListener("click", deleteTask);
   return delBtn;
 };
@@ -304,9 +320,10 @@ function createDragBars () {
   return dragDiv;
 };
 
-function createTaskMainDiv () {
+function createTaskMainDiv (taskObject) {
   let taskMain = document.createElement("div");
   taskMain.classList.add("taskMain");
+  taskMain.dataset.indexNumber = (taskObject.index);
   let taskCont = document.createElement("div");
   taskCont.classList.add("taskCont");
   let taskSide = document.createElement("div");
