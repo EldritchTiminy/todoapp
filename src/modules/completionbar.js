@@ -12,7 +12,7 @@ function checkCompletion () {
     if (task.subtasks) {
       for (let subtask of task.subtasks) {
         taskTotal++;
-        if (subtask.complete) {
+        if (subtask.complete || task.complete) {
           taskCompletion++;
         };
       };
@@ -46,11 +46,11 @@ let timerVar = null;
 
 
 function myMove (currentP, newP) {
-  console.log("currentP", currentP, typeof currentP);
-  console.log("newP", newP, typeof newP);
+  //console.log("currentP", currentP, typeof currentP);
+  //console.log("newP", newP, typeof newP);
   let elem = document.getElementById("completePerc");
   let pos = currentP;
-  console.log("pos", pos, typeof pos);
+  //console.log("pos", pos, typeof pos);
   clearInterval(timerVar);
   timerVar = setInterval(animFrame, 8);
   function animFrame () {

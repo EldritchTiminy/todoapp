@@ -154,6 +154,7 @@ a.navLink:hover {
   padding: 8px 0 8px 16px;
   color: var(--clr-primary-a50);
   border-bottom: 1px solid var(--clr-surface-a10);
+  z-index: 5;
 }
 
 #completionBar {
@@ -281,6 +282,10 @@ div.addSTDiv:hover {
   background-color: var(--clr-surface-tonal-a50);
 }
 
+div.addSTDiv {
+  position: relative;
+}
+
 div.deleteDiv:active,
 div.addSTDiv:active {
   background-color: var(--clr-light-a0);
@@ -289,6 +294,16 @@ div.addSTDiv:active {
 img.deleteBtn,
 img.addBtn {
   width: 32px;
+  z-index: 1;
+}
+
+div.stCover {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #footer {

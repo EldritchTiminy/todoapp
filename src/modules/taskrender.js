@@ -49,7 +49,7 @@ function addSubtask (e) {
   let inputField = e.target.parentElement.querySelector("input")
   let subTaskTitle = getInputVal(inputField);
   clrInputVal(inputField);
-  let parentIndex = Number(e.target.parentElement.parentElement.dataset.indexNumber);
+  let parentIndex = Number(e.target.parentElement.parentElement.parentElement.parentElement.dataset.indexNumber);
   let parentTask = taskLibrary.tasks[parentIndex];
   parentTask.addSubTask(subTaskTitle);
   if (taskLibrary.autoSave) {
@@ -57,6 +57,7 @@ function addSubtask (e) {
   };
   renderSubtasks(parentTask);
   e.target.parentElement.remove();
+  SubTaskFormOpen = false;
 };
 
 function renderSubtasks (parentTaskObj) {
@@ -87,7 +88,7 @@ function createSubtask (subtask) {
   subtaskDelBtn.addEventListener("click", deleteSubtask);
   let subtaskCompBtn = document.createElement("button");
   subtaskCompBtn.type = "button";
-  subtaskCompBtn.textContent = "Complete";
+  subtaskCompBtn.innerHTML = "&#x2713";
   subtaskCompBtn.addEventListener("click", completeSubtask);
   subtaskLi.appendChild(subtaskSpan);
   subtaskLi.appendChild(subtaskDelBtn);
@@ -98,6 +99,7 @@ function createSubtask (subtask) {
 function deleteTask (event) {
   let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
   removeTask(targetIndex);
+  updateComplete();
 };
 
 function removeTask (index) {
@@ -111,8 +113,9 @@ function removeTask (index) {
 
 function deleteSubtask (event) {
   let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
-  let parentIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
+  let parentIndex = Number(event.target.parentElement.parentElement.parentElement.parentElement.dataset.indexNumber);
   removeSubtask(parentIndex, targetIndex);
+  updateComplete();
 };
 
 function removeSubtask (parentIndex, subtaskIndex) {
@@ -124,7 +127,11 @@ function removeSubtask (parentIndex, subtaskIndex) {
   renderSubtasks(taskLibrary.tasks[parentIndex]);
 };
 
+let SubTaskFormOpen = false;
+
 function subTaskForm (e) {
+  if (SubTaskFormOpen === false) {
+    SubTaskFormOpen = true;
   let taskForm = document.createElement("form");
   let textInput = document.createElement("input");
   textInput.type = "text";
@@ -143,12 +150,18 @@ function subTaskForm (e) {
   taskForm.appendChild(textInput);
   taskForm.appendChild(submitBtn);
   taskForm.appendChild(cancelBtn);
-  e.target.parentElement.appendChild(taskForm);
+  // need to target subtask list
+  let stListTarget = e.target.parentElement.parentElement.parentElement;
+  console.log(stListTarget);
+  stListTarget.querySelector(".taskCont").querySelector(".stlist").appendChild(taskForm);
+  //e.target.parentElement.appendChild(taskForm);
   textInput.focus({focusVisible: true});
+  };
 };
 
 function cancelForm (e) {
   e.target.parentElement.remove();
+  SubTaskFormOpen = false;
 };
 
 function enterActivate (e) {
@@ -201,14 +214,14 @@ function completeTask (event) {
 
 function completeSubtask (event) {
   let subtaskIndex = Number(event.target.parentElement.dataset.indexNumber);
-  let parentTaskIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
+  let parentTaskIndex = Number(event.target.parentElement.parentElement.parentElement.parentElement.dataset.indexNumber);
   if (taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete != true) {
     taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete = true;
-    event.target.textContent = "Un-Complete";
+    event.target.style.color = "var(--clr-success-a0)"
     event.target.parentElement.classList.add("complete");
   } else {
     taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete = false;
-    event.target.textContent = "Complete";
+    event.target.style.color = "";
     event.target.parentElement.classList.remove("complete");
   };
   if (taskLibrary.autoSave) {
@@ -273,9 +286,13 @@ function createSubtaskBtn () {
   subTaskBtn.classList.add("addSTDiv");
   let subTaskIcon = document.createElement("img");
   subTaskIcon.src = plus;
+  subTaskIcon.style.zIndex = 1;
   subTaskIcon.classList.add("addBtn");
+  let subTaskCover = document.createElement("div");
+  subTaskCover.classList.add("stCover");
+  subTaskBtn.appendChild(subTaskCover);
   subTaskBtn.appendChild(subTaskIcon);
-  subTaskBtn.addEventListener("click", subTaskForm);
+  subTaskCover.addEventListener("click", subTaskForm);
   return subTaskBtn;
 };
 
