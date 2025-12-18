@@ -166,7 +166,8 @@ a.navLink:hover {
 
 #completePerc {
   background-color: var(--clr-primary-a0);
-  width: 0px;
+  min-width: 1%;
+  width: 0;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -312,4 +313,9 @@ img.addBtn {
   border-radius: 8px;
   margin: 8px;
   padding: 8px;
+}
+
+#wipDisc > header {
+  font-size: 1.5rem;
+  margin: 0 0 8px 0;
 }
