@@ -1,3 +1,10 @@
+/*
+this script handles all of the DOM manipulation for rendering tasks, subtasks, and all of their html elements
+
+
+*/
+
+// imports
 import taskLibrary from "./tasks";
 import {saveList} from "./storage";
 import {taskUp, taskDn} from "./movetask";
@@ -7,152 +14,8 @@ import drag from "../public/drag.svg";
 import trash from "../public/trash.svg";
 import updateComplete from "./completionbar";
 
-function renderTask (taskObject) {
-  let taskList = document.getElementById("taskList");
-  let taskDiv = createTaskDiv(taskObject);
-  taskList.appendChild(taskDiv);
-  let components = [
-    createDragBars(),
-    createTaskMainDiv(taskObject),
-  ];
-  for (let comp of components) {
-    taskDiv.appendChild(comp);
-  };
-  let population = [
-    createTaskHeader(taskObject),
-    createTaskDesc(taskObject),
-    createSubtaskList(),
-    createCompBtn(taskObject),
-  ];
-  for (let content of population) {
-    taskDiv.querySelector("div.taskCont").appendChild(content);
-  };
-  let buttons = [
-    createSubtaskBtn(),
-    createDelBtn(),
-  ];
-  for (let button of buttons) {
-    taskDiv.querySelector("div.taskSide").appendChild(button);
-  };
-  renderSubtasks(taskObject);
-};
-
-function renderSubtasks (parentTaskObj) {
-  if (parentTaskObj.subtasks != null) {
-    let parentIndex = parentTaskObj.index;
-    let taskList = document.getElementById("taskList");
-    let parentTask = taskList.querySelector(`div.task[data-index-number="${parentIndex}"]`);
-    console.log(parentTask);
-    let parentUl = parentTask.querySelector(".stlist"); 
-    parentUl.innerHTML = "";
-    for (let subtask of parentTaskObj.subtasks) {
-      let subtaskLi = createSubtask(subtask);
-      parentUl.appendChild(subtaskLi);
-    };
-  };
-};
-
-function createSubtask (subtask) {
-  let subtaskLi = document.createElement("li");
-  subtaskLi.dataset.indexNumber = subtask.index;
-  subtaskLi.classList.add("subtask");
-  let subtaskSpan = document.createElement("span");
-  subtaskSpan.textContent = subtask.text;
-  subtaskLi.appendChild(subtaskSpan);
-  let subtaskDelBtn = document.createElement("button");
-  subtaskDelBtn.type = "button";
-  subtaskDelBtn.textContent = "✕";
-  subtaskDelBtn.addEventListener("click", deleteSubtask);
-  let subtaskCompBtn = document.createElement("input");
-  subtaskCompBtn.type = "checkbox";
-  subtaskCompBtn.textContent = "✓";
-  subtaskCompBtn.addEventListener("click", completeSubtask);
-  subtaskLi.appendChild(subtaskCompBtn);
-  subtaskLi.appendChild(subtaskSpan);
-  subtaskLi.appendChild(subtaskDelBtn);
-  return subtaskLi;
-};
-
-// event listener trigger function
-function deleteTask (event) {
-  let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
-  removeTask(targetIndex);
-  updateComplete();
-};
-
-// function for removing tasks
-function removeTask (index) {
-  taskLibrary.tasks.splice(index, 1);
-  taskLibrary.updateOrder();
-  if (taskLibrary.autoSave) {
-    saveList();
-  };
-  renderList(taskLibrary.tasks);
-};
-
-// event listener trigger function
-function deleteSubtask (event) {
-  let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
-  let parentIndex = Number(event.target.parentElement.parentElement.parentElement.parentElement.dataset.indexNumber);
-  removeSubtask(parentIndex, targetIndex);
-  updateComplete();
-};
-
-// function for removing subtasaks
-function removeSubtask (parentIndex, subtaskIndex) {
-  taskLibrary.tasks[parentIndex].subtasks.splice(subtaskIndex, 1);
-  taskLibrary.tasks[parentIndex].updateSubOrder();
-  if (taskLibrary.autoSave) {
-    saveList();
-  };
-  renderSubtasks(taskLibrary.tasks[parentIndex]);
-};
-
-function renderList (lib) {
-  let taskList = document.getElementById("taskList");
-  taskList.innerHTML = "";
-  const l = lib.length;
-  for (let i = 0; i < l; i++) {
-    renderTask(lib[i]);
-  };
-};
-
-function completeTask (event) {
-  let currentIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
-  if (taskLibrary.tasks[currentIndex].complete != true) {
-    taskLibrary.tasks[currentIndex].complete = true;
-    event.target.textContent = "Un-Complete";
-    event.target.parentElement.classList.add("complete");
-  } else {
-    taskLibrary.tasks[currentIndex].complete = false;
-    event.target.textContent = "Complete";
-    event.target.parentElement.classList.remove("complete");
-  };
-  if (taskLibrary.autoSave) {
-    saveList();
-  };
-  updateComplete();
-};
-
-function completeSubtask (event) {
-  let subtaskIndex = Number(event.target.parentElement.dataset.indexNumber);
-  let parentTaskIndex = Number(event.target.parentElement.parentElement.parentElement.parentElement.dataset.indexNumber);
-  if (taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete != true) {
-    taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete = true;
-    event.target.style.color = "var(--clr-success-a0)"
-    event.target.parentElement.classList.add("complete");
-  } else {
-    taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete = false;
-    event.target.style.color = "";
-    event.target.parentElement.classList.remove("complete");
-  };
-  if (taskLibrary.autoSave) {
-    saveList();
-  };
-  updateComplete();
-};
-
-// Page Element Builder Functions
+// scripting
+// component builder functions
 function createTaskDiv (taskObject) {
   let taskDiv = document.createElement("div");
   taskDiv.classList.add("task");
@@ -160,7 +23,7 @@ function createTaskDiv (taskObject) {
   return taskDiv;
 };
 
-function createOrderLabel(taskObject) {
+/*function createOrderLabel(taskObject) {
   let taskListOrder = document.createElement("p");
   taskListOrder.classList.add("listOrder");
   taskListOrder.textContent = `#${taskObject.index + 1}`;
@@ -181,7 +44,7 @@ function createDownSortBtn () {
   dnBtn.textContent = "Move Down";
   dnBtn.addEventListener("click", taskDn);
   return dnBtn;
-};
+};*/
 
 function createTaskDesc (taskObject) {
   let tTitle = document.createElement("p");
@@ -263,4 +126,153 @@ function createTaskHeader (taskObject) {
   return taskHeader;
 };
 
-export {renderTask, renderList, subTaskForm, renderSubtasks};
+function createSubtask (subtask) {
+  let subtaskLi = document.createElement("li");
+  subtaskLi.dataset.indexNumber = subtask.index;
+  subtaskLi.classList.add("subtask");
+  let subtaskSpan = document.createElement("span");
+  subtaskSpan.textContent = subtask.text;
+  subtaskLi.appendChild(subtaskSpan);
+  let subtaskDelBtn = document.createElement("button");
+  subtaskDelBtn.type = "button";
+  subtaskDelBtn.textContent = "✕";
+  subtaskDelBtn.addEventListener("click", deleteSubtask);
+  let subtaskCompBtn = document.createElement("input");
+  subtaskCompBtn.type = "checkbox";
+  //subtaskCompBtn.textContent = "✓";
+  subtaskCompBtn.addEventListener("click", completeSubtask);
+  subtaskLi.appendChild(subtaskCompBtn);
+  subtaskLi.appendChild(subtaskSpan);
+  subtaskLi.appendChild(subtaskDelBtn);
+  return subtaskLi;
+};
+
+// task remover functions
+function deleteTask (event) {
+  let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
+  removeTask(targetIndex);
+  updateComplete();
+};
+
+function removeTask (index) {
+  taskLibrary.tasks.splice(index, 1);
+  taskLibrary.updateOrder();
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
+  renderList(taskLibrary.tasks);
+};
+
+function deleteSubtask (event) {
+  let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
+  let parentIndex = Number(event.target.parentElement.parentElement.parentElement.parentElement.dataset.indexNumber);
+  removeSubtask(parentIndex, targetIndex);
+  updateComplete();
+};
+
+function removeSubtask (parentIndex, subtaskIndex) {
+  taskLibrary.tasks[parentIndex].subtasks.splice(subtaskIndex, 1);
+  taskLibrary.tasks[parentIndex].updateSubOrder();
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
+  renderSubtasks(taskLibrary.tasks[parentIndex]);
+};
+
+// mark as complete functions
+function completeTask (event) {
+  let currentIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
+  if (taskLibrary.tasks[currentIndex].complete != true) {
+    taskLibrary.tasks[currentIndex].complete = true;
+    event.target.textContent = "Un-Complete";
+    event.target.parentElement.classList.add("complete");
+  } else {
+    taskLibrary.tasks[currentIndex].complete = false;
+    event.target.textContent = "Complete";
+    event.target.parentElement.classList.remove("complete");
+  };
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
+  updateComplete();
+};
+
+function completeSubtask (event) {
+  let subtaskIndex = Number(event.target.parentElement.dataset.indexNumber);
+  let parentTaskIndex = Number(event.target.parentElement.parentElement.parentElement.parentElement.dataset.indexNumber);
+  if (taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete != true) {
+    taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete = true;
+    event.target.style.color = "var(--clr-success-a0)"
+    event.target.parentElement.classList.add("complete");
+  } else {
+    taskLibrary.tasks[parentTaskIndex].subtasks[subtaskIndex].complete = false;
+    event.target.style.color = "";
+    event.target.parentElement.classList.remove("complete");
+  };
+  if (taskLibrary.autoSave) {
+    saveList();
+  };
+  updateComplete();
+};
+
+// rendering functions
+function renderSubtasks (parentTaskObj) {
+  if (parentTaskObj.subtasks != null) {
+    let parentIndex = parentTaskObj.index;
+    let taskList = document.getElementById("taskList");
+    let parentTask = taskList.querySelector(`div.task[data-index-number="${parentIndex}"]`);
+    console.log(parentTask);
+    let parentUl = parentTask.querySelector(".stlist"); 
+    parentUl.innerHTML = "";
+    for (let subtask of parentTaskObj.subtasks) {
+      let subtaskLi = createSubtask(subtask);
+      parentUl.appendChild(subtaskLi);
+    };
+  };
+};
+
+function renderTask (taskObject) {
+  let taskList = document.getElementById("taskList");
+  let taskDiv = createTaskDiv(taskObject);
+  taskList.appendChild(taskDiv);
+  let components = [
+    createDragBars(),
+    createTaskMainDiv(taskObject),
+  ];
+  for (let comp of components) {
+    taskDiv.appendChild(comp);
+  };
+  let population = [
+    createTaskHeader(taskObject),
+    createTaskDesc(taskObject),
+    createSubtaskList(),
+    createCompBtn(taskObject),
+  ];
+  for (let content of population) {
+    taskDiv.querySelector("div.taskCont").appendChild(content);
+  };
+  let buttons = [
+    createSubtaskBtn(),
+    createDelBtn(),
+  ];
+  for (let button of buttons) {
+    taskDiv.querySelector("div.taskSide").appendChild(button);
+  };
+  renderSubtasks(taskObject);
+};
+
+function renderList (lib) {
+  let taskList = document.getElementById("taskList");
+  taskList.innerHTML = "";
+  const l = lib.length;
+  for (let i = 0; i < l; i++) {
+    renderTask(lib[i]);
+  };
+};
+
+// exports
+export {
+  renderTask,
+  renderList,
+  renderSubtasks
+};
