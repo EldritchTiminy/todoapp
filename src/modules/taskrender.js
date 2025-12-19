@@ -84,24 +84,26 @@ function createSubtask (subtask) {
   subtaskLi.appendChild(subtaskSpan);
   let subtaskDelBtn = document.createElement("button");
   subtaskDelBtn.type = "button";
-  subtaskDelBtn.textContent = "Delete";
+  subtaskDelBtn.textContent = "✕";
   subtaskDelBtn.addEventListener("click", deleteSubtask);
-  let subtaskCompBtn = document.createElement("button");
-  subtaskCompBtn.type = "button";
-  subtaskCompBtn.innerHTML = "&#x2713";
+  let subtaskCompBtn = document.createElement("input");
+  subtaskCompBtn.type = "checkbox";
+  subtaskCompBtn.textContent = "✓";
   subtaskCompBtn.addEventListener("click", completeSubtask);
+  subtaskLi.appendChild(subtaskCompBtn);
   subtaskLi.appendChild(subtaskSpan);
   subtaskLi.appendChild(subtaskDelBtn);
-  subtaskLi.appendChild(subtaskCompBtn);
   return subtaskLi;
 };
 
+// event listener trigger function
 function deleteTask (event) {
   let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
   removeTask(targetIndex);
   updateComplete();
 };
 
+// function for removing tasks
 function removeTask (index) {
   taskLibrary.tasks.splice(index, 1);
   taskLibrary.updateOrder();
@@ -111,6 +113,7 @@ function removeTask (index) {
   renderList(taskLibrary.tasks);
 };
 
+// event listener trigger function
 function deleteSubtask (event) {
   let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
   let parentIndex = Number(event.target.parentElement.parentElement.parentElement.parentElement.dataset.indexNumber);
@@ -118,6 +121,7 @@ function deleteSubtask (event) {
   updateComplete();
 };
 
+// function for removing subtasaks
 function removeSubtask (parentIndex, subtaskIndex) {
   taskLibrary.tasks[parentIndex].subtasks.splice(subtaskIndex, 1);
   taskLibrary.tasks[parentIndex].updateSubOrder();
@@ -180,20 +184,20 @@ function renderList (lib) {
   };
 };
 
-function getTitle () {
+/*function getTitle () {
   let titleInput = document.getElementById("taskTitle");
   let taskTitle = getInputVal(titleInput);
   clrInputVal(titleInput);
   return taskTitle;
-};
+};*/
 
-function addTask () {
+/*function addTask () {
   taskLibrary.addTask(getTitle());
   if (taskLibrary.autoSave) {
     saveList();
   };
   renderList(taskLibrary.tasks);
-};
+};*/
 
 function completeTask (event) {
   let currentIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
@@ -356,4 +360,4 @@ function createTaskHeader (taskObject) {
   return taskHeader;
 };
 
-export {renderTask, renderList, subTaskForm, renderSubtasks, addTask};
+export {renderTask, renderList, subTaskForm, renderSubtasks/*, addTask*/};

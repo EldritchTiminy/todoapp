@@ -4,7 +4,7 @@ import {saveList, autoLoadList, clearList, autoSaveToggle, downloadBlob} from ".
 import toggleSettings from "./togglemenu";
 
 function loadFormButtons () {
-  addTaskButton();
+  /*addTaskButton();*/
   clearAllTasksButton();
   saveListButton();
   autoSaveButton();
@@ -23,7 +23,7 @@ function saveListButton () {
   saveBtn.addEventListener("click", saveList);
 };
 
-function addTaskButton () {
+/*function addTaskButton () {
   let subBtn = document.getElementById("addBtn");
   let tInput = document.getElementById("taskTitle");
   subBtn.addEventListener("click", addTask);
@@ -33,7 +33,7 @@ function addTaskButton () {
       document.getElementById("addBtn").click();
     };
   });
-};
+};*/
 
 function clearAllTasksButton () {
   let clrBtn = document.getElementById("clrList");

@@ -261,8 +261,17 @@ div.taskCont > header {
   font-size: 20px;
 }
 
+ul.stlist {
+  list-style-type: none;
+}
+
 ul.stlist > li {
   margin-left: 12px;
+}
+
+li.subtask > button,
+li.subtask > input {
+  margin: 0 8px;
 }
 
 div.deleteDiv,
