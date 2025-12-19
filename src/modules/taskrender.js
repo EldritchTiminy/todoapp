@@ -14,14 +14,6 @@ function renderTask (taskObject) {
   let components = [
     createDragBars(),
     createTaskMainDiv(taskObject),
-    //createOrderLabel(taskObject),
-    //createUpSortBtn(),
-    //createDownSortBtn(),
-    //createCompBtn(taskObject),
-    //createTaskText(taskObject),
-    //createSubtaskList(),
-    //createSubtaskBtn(),
-    //createDelBtn()
   ];
   for (let comp of components) {
     taskDiv.appendChild(comp);
