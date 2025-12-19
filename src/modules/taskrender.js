@@ -184,21 +184,6 @@ function renderList (lib) {
   };
 };
 
-/*function getTitle () {
-  let titleInput = document.getElementById("taskTitle");
-  let taskTitle = getInputVal(titleInput);
-  clrInputVal(titleInput);
-  return taskTitle;
-};*/
-
-/*function addTask () {
-  taskLibrary.addTask(getTitle());
-  if (taskLibrary.autoSave) {
-    saveList();
-  };
-  renderList(taskLibrary.tasks);
-};*/
-
 function completeTask (event) {
   let currentIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
   if (taskLibrary.tasks[currentIndex].complete != true) {
@@ -360,4 +345,4 @@ function createTaskHeader (taskObject) {
   return taskHeader;
 };
 
-export {renderTask, renderList, subTaskForm, renderSubtasks/*, addTask*/};
+export {renderTask, renderList, subTaskForm, renderSubtasks};

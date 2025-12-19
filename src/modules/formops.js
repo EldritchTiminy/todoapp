@@ -23,18 +23,6 @@ function saveListButton () {
   saveBtn.addEventListener("click", saveList);
 };
 
-/*function addTaskButton () {
-  let subBtn = document.getElementById("addBtn");
-  let tInput = document.getElementById("taskTitle");
-  subBtn.addEventListener("click", addTask);
-  tInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      document.getElementById("addBtn").click();
-    };
-  });
-};*/
-
 function clearAllTasksButton () {
   let clrBtn = document.getElementById("clrList");
   clrBtn.addEventListener("click", () => {

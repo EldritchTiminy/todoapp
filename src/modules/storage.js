@@ -6,7 +6,7 @@ function overview:
 
 - loadList () - retrieves the array stored in localStorage, parses it with deserialize() (serializer, line 37), splits the array into its two parts, then saves the list and autosave boolean to local taskLibrary
 
-- autoLoadList() - checks if there is a saved list from a previous visit in localStorage, loads a few example tasks with exampleTasks() (examples.js, line 4) if there isn't a saved list
+- autoLoadList() - checks if there is a saved list from a previous visit in localStorage, loads a few example tasks with exampleTasks() (examples.js, line 10) if there isn't a saved list
 
 - clearList() - sets the current task list to an empty array and saves it
 
