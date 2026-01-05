@@ -44,10 +44,15 @@
 
       <div id="content">
 
-        <form id="taskForm">
+        <form id="taskForm" style="margin: 12px;">
           <div id="newTaskForm">
-            <input type="text" id="taskTitle">
-            <button type="button" id="addBtn">Add Task</button>
+            <input type="text" id="taskTitle" style="display: none;">
+            <button type="button" id="addBtn" style="display: none;">Add Task</button>
+            <button type="button" id="canBtn" style="display: none;">Cancel</button>
+            <div id="formTog" style="width:120px;height:40px;border:1px solid #a0fd1b;border-radius:8px;display:flex;justify-content:center;align-items:center;color:#a0fd1b;">
+              <span id="addBtnTxt">New Task</span>
+              <img src="./public/plus.svg" style="width:32px;margin-left:4px;">
+            </div>
           </div>
         </form>
         

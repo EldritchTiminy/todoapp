@@ -7,7 +7,7 @@ this script handles all of the DOM manipulation for rendering tasks, subtasks, a
 // imports
 import taskLibrary from "./tasks";
 import {saveList} from "./storage";
-import {taskUp, taskDn} from "./movetask";
+//import {taskUp, taskDn} from "./movetask";
 import subTaskForm from "./addsubtaskform";
 import plus from "../public/plus.svg";
 import drag from "../public/drag.svg";
@@ -22,29 +22,6 @@ function createTaskDiv (taskObject) {
   taskDiv.dataset.indexNumber = (taskObject.index);
   return taskDiv;
 };
-
-/*function createOrderLabel(taskObject) {
-  let taskListOrder = document.createElement("p");
-  taskListOrder.classList.add("listOrder");
-  taskListOrder.textContent = `#${taskObject.index + 1}`;
-  return taskListOrder;
-};
-
-function createUpSortBtn () {
-  let upBtn = document.createElement("button");
-  upBtn.type = "button";
-  upBtn.textContent = "Move Up";
-  upBtn.addEventListener("click", taskUp);
-  return upBtn;
-};
-
-function createDownSortBtn () {
-  let dnBtn = document.createElement("button");
-  dnBtn.type = "button";
-  dnBtn.textContent = "Move Down";
-  dnBtn.addEventListener("click", taskDn);
-  return dnBtn;
-};*/
 
 function createTaskDesc (taskObject) {
   let tTitle = document.createElement("p");
@@ -149,7 +126,7 @@ function createSubtask (subtask) {
 
 // task remover functions
 function deleteTask (event) {
-  let targetIndex = Number(event.target.parentElement.dataset.indexNumber);
+  let targetIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
   removeTask(targetIndex);
   updateComplete();
 };

@@ -180,12 +180,13 @@ a.navLink:hover {
   flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 32px 1fr;
+  grid-template-rows: 56px 1fr;
 }
 
-form.taskForm {
+#taskForm {
   grid-row: 1/2;
   grid-column: 1/5;
+  width: 100%;
 }
 
 div.listOptions {

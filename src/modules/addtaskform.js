@@ -33,7 +33,7 @@ function pushTask () {
   renderList(taskLibrary.tasks); // re-render list with new task
 };
 
-export default function addTaskButton () {
+export function addTaskButton () {
   let subBtn = document.getElementById("addBtn"); // grabbing button (template.html, line 50)
   let taskTitle = document.getElementById("taskTitle"); // grabbing text input (template.html, line 49)
   subBtn.addEventListener("click", pushTask); // event listeners, trigger addTask
@@ -43,4 +43,23 @@ export default function addTaskButton () {
       document.getElementById("addBtn").click();
     };
   });
+};
+
+// form pop up button
+export function formTog () {
+  let titleInput = document.getElementById("taskTitle");
+  let addBtn = document.getElementById("addBtn");
+  let canBtn = document.getElementById("canBtn");
+  let addBtnTxt = document.getElementById("addBtnTxt");
+  if (titleInput.style.display === "none") {
+    titleInput.style.display = "inline";
+    addBtn.style.display = "inline";
+    canBtn.style.display = "inline";
+    addBtnTxt.style.display = "none";
+  } else {
+    titleInput.style.display = "none";
+    addBtn.style.display = "none";
+    canBtn.style.display = "none";
+    addBtnTxt.style.display = "inline";
+  };
 };
