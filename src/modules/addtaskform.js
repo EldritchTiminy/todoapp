@@ -51,15 +51,41 @@ export function formTog () {
   let addBtn = document.getElementById("addBtn");
   let canBtn = document.getElementById("canBtn");
   let addBtnTxt = document.getElementById("addBtnTxt");
+  let formTog = document.getElementById("formTog");
   if (titleInput.style.display === "none") {
     titleInput.style.display = "inline";
     addBtn.style.display = "inline";
     canBtn.style.display = "inline";
     addBtnTxt.style.display = "none";
+    animateBtn(parseInt(formTog.style.width), 40);
   } else {
     titleInput.style.display = "none";
     addBtn.style.display = "none";
     canBtn.style.display = "none";
     addBtnTxt.style.display = "inline";
+    animateBtn(parseInt(formTog.style.width), 120);
+  };
+};
+
+let timerVar = null;
+export function animateBtn (currentP, newP) {
+  console.log("currentP", currentP, typeof currentP);
+  console.log("newP", newP, typeof newP);
+  let elem = document.getElementById("formTog");
+  let pos = currentP;
+  clearInterval(timerVar);
+  timerVar = setInterval(animFrame, 4);
+  function animFrame () {
+    if (pos === newP) {
+      clearInterval(timerVar);
+    } else {
+      if (pos < newP) {
+        pos++;
+        elem.style.width = `${pos}px`;
+      } else {
+        pos--;
+        elem.style.width = `${pos}px`;
+      };
+    };
   };
 };
