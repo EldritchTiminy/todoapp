@@ -10,7 +10,7 @@ function loadFormButtons () {
   autoSaveButton();
   downloadButton();
   uploadButton();
-  toggleSettingsButton();
+  //toggleSettingsButton();
 };
 
 function toggleSettingsButton () {

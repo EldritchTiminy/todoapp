@@ -22,7 +22,7 @@ function checkCompletion () {
   return taskCompPerc;
 };
 
-export default function updateComplete () {
+export function updateComplete () {
   let completion = document.getElementById("completePerc");
   let currentWidth = completion.style.width;
   let currentComp;
@@ -65,5 +65,21 @@ function myMove (currentP, newP) {
         elem.style.width = `${pos}%`;
       };
     };
+  };
+};
+
+export function completionToggleBtn () {
+  let togCompBar = document.getElementById("togCompBar");
+  togCompBar.addEventListener("click", toggleCompletionBar);
+};
+
+function toggleCompletionBar (e) {
+  let compBar = document.getElementById("completionBar");
+  if (compBar.style.display === "block") {
+    compBar.style.display = "none";
+    e.target.textContent = "Show Completion";
+  } else {
+    compBar.style.display = "block";
+    e.target.textContent = "Hide Completion";
   };
 };

@@ -38,7 +38,7 @@
         <p>List Name: To-do<p>
       </header>
 
-      <div id="completionBar">
+      <div id="completionBar" style="display:block;">
         <div id="completePerc"></div>
       </div>
 
@@ -53,22 +53,25 @@
         </form>
         
         <div class="listOptions">
+          <div class="wipwarn">
+            <p>This area is a work in progress</p>
+          </div>
           <h2>List Options</h2>
           <h4>Sort Tasks By</h4>
           <h4>Complete All List Items</h4>
-          <ul>
-            <li>Display Style: simple/detailed</li>
-            <li>Show/hide completion bar</li>
-            <li>Customize completion bar</li>
-            <li>Rename List</li>
-          </ul>
-          <button type="button" id="setBtn">Settings</button>
-          <div id="formOptions" style="display: none">
-            <button type="button" id="saveBtn">Save List</button>
-            <button type="button" id="autoSaveBtn">Auto-save: off</button>
-            <button type="button" id="download">Download Saved List File</button>
-            <button type="button" id="upload">Load List from file</button>
-            <button type="button" id="clrList">Clear All Tasks</button>
+          <!-- <button type="button" id="setBtn">Settings</button> -->
+          <div id="formOptions">
+            <ul>
+              <li><button type="button" id="saveBtn">Save List</button></li>
+              <li><button type="button" id="autoSaveBtn">Auto-save: off</button></li>
+              <li><button type="button" id="download">Download Saved List File</button></li>
+              <li><button type="button" id="upload">Load List from file</button></li>
+              <li><button type="button" id="clrList">Clear All Tasks</button></li>
+              <li><button type="button" id="togCompBar">Hide Completion</button></li>
+              <li>Display Style: simple/detailed</li>
+              <li>Customize completion bar</li>
+              <li>Rename List</li>
+            </ul>
           </div>
         </div>
 

@@ -12,7 +12,7 @@ import subTaskForm from "./addsubtaskform";
 import plus from "../public/plus.svg";
 import drag from "../public/drag.svg";
 import trash from "../public/trash.svg";
-import updateComplete from "./completionbar";
+import {updateComplete} from "./completionbar";
 
 // scripting
 // component builder functions
