@@ -33,37 +33,36 @@ function pushTask () {
   renderList(taskLibrary.tasks); // re-render list with new task
 };
 
-export function addTaskButton () {
-  let subBtn = document.getElementById("addBtn"); // grabbing button (template.html, line 50)
+export function createAddTaskButton () {
+  let addBtn = document.getElementById("addBtn"); // grabbing button (template.html, line 50)
   let taskTitle = document.getElementById("taskTitle"); // grabbing text input (template.html, line 49)
-  subBtn.addEventListener("click", pushTask); // event listeners, trigger addTask
+  addBtn.addEventListener("click", addTaskHandler); // event listeners, trigger addTask
   taskTitle.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      document.getElementById("addBtn").click();
+      addBtn.click();
     };
   });
 };
 
-// form pop up button
-export function formTog () {
-  let titleInput = document.getElementById("taskTitle");
-  let addBtn = document.getElementById("addBtn");
-  let canBtn = document.getElementById("canBtn");
-  let addBtnTxt = document.getElementById("addBtnTxt");
-  let formTog = document.getElementById("formTog");
-  if (titleInput.style.display === "none") {
-    titleInput.style.display = "inline";
-    addBtn.style.display = "inline";
-    canBtn.style.display = "inline";
-    addBtnTxt.style.display = "none";
-    animateBtn(parseInt(formTog.style.width), 40);
+function addTaskHandler () {
+  let taskTitle = document.getElementById("taskTitle");
+  if (taskTitle.style.display === "none") {
+    formTog();
   } else {
-    titleInput.style.display = "none";
-    addBtn.style.display = "none";
+    pushTask();
+  };
+};
+
+export function formTog () {
+  let taskTitle = document.getElementById("taskTitle");
+  let canBtn = document.getElementById("canBtn");
+  if (taskTitle.style.display === "none") {
+    taskTitle.style.display = "inline";
+    canBtn.style.display = "inline";
+  } else {
+    taskTitle.style.display = "none";
     canBtn.style.display = "none";
-    addBtnTxt.style.display = "inline";
-    animateBtn(parseInt(formTog.style.width), 120);
   };
 };
 
@@ -87,5 +86,19 @@ export function animateBtn (currentP, newP) {
         elem.style.width = `${pos}px`;
       };
     };
+  };
+};
+
+export function createCancelBtn () {
+  let canBtn = document.getElementById("canBtn");
+  canBtn.addEventListener("click", cancelHandler);
+};
+
+function cancelHandler () {
+  let taskTitle = document.getElementById("taskTitle");
+  if (taskTitle.value === "") {
+    formTog();
+  } else {
+    taskTitle.value = "";
   };
 };

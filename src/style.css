@@ -183,12 +183,30 @@ a.navLink:hover {
   grid-template-rows: 56px 1fr;
 }
 
+/* new task form section */
 #taskForm {
   grid-row: 1/2;
   grid-column: 1/5;
-  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 8px;
 }
 
+#taskForm div {
+  box-sizing: border-box;
+}
+
+#newTaskForm {
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+/* options side bar */
 div.listOptions {
   grid-column: 4/5;
   grid-row: 2/3;
