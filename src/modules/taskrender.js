@@ -58,7 +58,9 @@ function createDelBtn () {
   deleteIcon.src = trash;
   deleteIcon.classList.add("deleteBtn");
   delBtn.appendChild(deleteIcon);
-  delBtn.addEventListener("click", deleteTask);
+  delBtn.addEventListener("click", (e) => {
+    deleteConfirm(e, deleteTask);
+  });
   return delBtn;
 };
 
@@ -113,7 +115,9 @@ function createSubtask (subtask) {
   let subtaskDelBtn = document.createElement("button");
   subtaskDelBtn.type = "button";
   subtaskDelBtn.textContent = "✕";
-  subtaskDelBtn.addEventListener("click", deleteSubtask);
+  subtaskDelBtn.addEventListener("click", (e) => {
+    deleteConfirm(e, deleteSubtask)}
+  );
   let subtaskCompBtn = document.createElement("input");
   subtaskCompBtn.type = "checkbox";
   //subtaskCompBtn.textContent = "✓";
@@ -125,6 +129,19 @@ function createSubtask (subtask) {
 };
 
 // task remover functions
+function deleteConfirm (event, callBackFunc) {
+  if (taskLibrary.deleteConfirm === true) {
+    let userConfirm = confirm("Are you sure you want to delete this item?");
+    if (userConfirm === true) {
+      callBackFunc(event);
+    } else {
+      return;
+    };
+  } else {
+    callBackFunc(event);
+  };
+};
+
 function deleteTask (event) {
   let targetIndex = Number(event.target.parentElement.parentElement.parentElement.dataset.indexNumber);
   removeTask(targetIndex);

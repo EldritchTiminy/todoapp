@@ -10,6 +10,7 @@ function loadFormButtons () {
   autoSaveButton();
   downloadButton();
   uploadButton();
+  togDelCon();
   //toggleSettingsButton();
 };
 
@@ -65,7 +66,7 @@ function downloadButton () {
   });
 };
 
-function uploadButton() {
+function uploadButton () {
   const hiddenUpload = document.createElement("input");
   hiddenUpload.type = "file";
   hiddenUpload.accept = ".json";
@@ -90,6 +91,19 @@ function uploadButton() {
       };
     };
     reader.readAsText(file);
+  });
+};
+
+function togDelCon () {
+  let togDelConBtn = document.getElementById("togDelCon");
+  togDelConBtn.addEventListener("click", () => {
+    if (taskLibrary.deleteConfirm === true) {
+      taskLibrary.deleteConfirm = false;
+      togDelConBtn.textContent = "Delete Confirmation: Off";
+    } else {
+      taskLibrary.deleteConfirm = true;
+      togDelConBtn.textContent = "Delete Confirmation: On";
+    };
   });
 };
 

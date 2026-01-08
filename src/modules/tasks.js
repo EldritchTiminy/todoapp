@@ -46,6 +46,7 @@ const taskLibrary = {
     this.tasks.push(newTask);
   },
   autoSave: false,
+  deleteConfirm: true,
 };
 
 export default taskLibrary;
