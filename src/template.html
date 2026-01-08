@@ -47,8 +47,8 @@
         <form id="taskForm">
           <div id="newTaskForm">
             <input type="text" id="taskTitle" placeholder="Type your next task here..." style="display:none;">
-            <button type="button" id="addBtn">New Task</button>
-            <button type="button" id="canBtn" style="display:none;">Cancel</button>
+            <button type="button" id="addBtn" title="Creates a new task and adds it to your list">New Task</button>
+            <button type="button" id="canBtn" style="display:none;" title="Clears the input field">Cancel</button>
           </div>
         </form>
         
@@ -62,12 +62,12 @@
           <!-- <button type="button" id="setBtn">Settings</button> -->
           <div id="formOptions">
             <ul>
-              <li><button type="button" id="saveBtn">Save List</button></li>
-              <li><button type="button" id="autoSaveBtn">Auto-save: off</button></li>
-              <li><button type="button" id="download">Download Saved List File</button></li>
-              <li><button type="button" id="upload">Load List from file</button></li>
-              <li><button type="button" id="clrList">Clear All Tasks</button></li>
-              <li><button type="button" id="togCompBar">Hide Completion</button></li>
+              <li><button type="button" id="saveBtn" title="Manually save your list">Save List</button></li>
+              <li><button type="button" id="autoSaveBtn" title="Saves the list automatically when toggled on">Auto-save: off</button></li>
+              <li><button type="button" id="download" title="Creates a JSON file so you can save your list locally">Download Saved List File</button></li>
+              <li><button type="button" id="upload" title="Import a list saved on your device">Load List from file</button></li>
+              <li><button type="button" id="clrList" title="Deletes all task items">Clear All Tasks</button></li>
+              <li><button type="button" id="togCompBar" title="Toggles the completion bar at the top of the screen">Hide Completion</button></li>
               <li>Display Style: simple/detailed</li>
               <li>Customize completion bar</li>
               <li>Rename List</li>
